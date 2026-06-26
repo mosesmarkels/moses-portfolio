@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Success. — Moses Markels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+  <div class="noise-bg"></div>
+  <div class="cursor" id="cursor"></div>
+
+  <header>
+    <a href="index.html" class="logo">Moses Markels</a>
+    <nav><ul>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul></nav>
+  </header>
+
+  <a href="index.html" class="back-btn">← Back</a>
+
+  <!-- HERO -->
+  <section class="project-hero">
+    <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/4a16ab0f-6a4f-4ee7-a9f5-e565bcc8f9af_rwc_59x0x2176x1702x2176.png?h=2f391a050df0cdd41247f5895df8a759" alt="Success.">
+    <div class="project-hero-content">
+      <h1 class="project-hero-title">Success.</h1>
+      <div class="project-hero-meta">
+        <span class="project-tag">Personal Documentary</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="project-content">
+
+    <!-- INTRO -->
+    <div class="project-intro">
+      <div class="project-intro-text">
+        <p>As I started thinking seriously about my future, one question kept coming up: What does it actually mean to be successful?</p>
+        <p>Success is a personal documentary that explores this question through intimate interviews with friends and family — each with their own definitions, doubts, and dreams. I layered those conversations with my own voiceover, reflecting on the pressure to "make it," and whether success is something we define for ourselves — or something the world defines for us.</p>
+      </div>
+      <div class="project-intro-details">
+        <p class="project-detail-label">Type</p>
+        <p>Personal Documentary</p>
+        <p class="project-detail-label">Subject</p>
+        <p>Defining success on your own terms</p>
+        <p class="project-detail-label">Format</p>
+        <p>Intimate interviews + personal voiceover</p>
+      </div>
+    </div>
+
+    <!-- VIDEO -->
+    <h2 class="section-heading">Watch the Film</h2>
+    <div class="video-wrap">
+      <iframe src="https://www-ccv.adobe.io/v1/player/ccv/QA55YFmIvuA/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" allowfullscreen title="Success."></iframe>
+    </div>
+
+    <!-- NEXT -->
+    <div class="next-project">
+      <div>
+        <p class="next-project-label">Next Project</p>
+        <a href="how-she-hurt-me.html">
+          <p class="next-project-title">How She Hurt Me →</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const cursor=document.getElementById('cursor');let mx=-100,my=-100,cx=-100,cy=-100;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function loop(){cx+=(mx-cx)*.15;cy+=(my-cy)*.15;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,img').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('large'));el.addEventListener('mouseleave',()=>cursor.classList.remove('large'));});
+  </script>
+</body>
+</html>
