@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How She Hurt Me — Moses Markels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+  <div class="noise-bg"></div>
+  <div class="cursor" id="cursor"></div>
+
+  <header>
+    <a href="index.html" class="logo">Moses Markels</a>
+    <nav><ul>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul></nav>
+  </header>
+
+  <a href="index.html" class="back-btn">← Back</a>
+
+  <!-- HERO -->
+  <section class="project-hero">
+    <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/fa286626-04f0-48d2-b520-eab4fb9a6240_rwc_220x82x1518x1187x1518.png?h=74389eb4fdbabb02884e7a388746865c" alt="How She Hurt Me">
+    <div class="project-hero-content">
+      <h1 class="project-hero-title">How She Hurt Me</h1>
+      <div class="project-hero-meta">
+        <span class="project-tag">Short Film</span>
+        <span class="project-tag">Documentary</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="project-content">
+
+    <!-- INTRO -->
+    <div class="project-intro">
+      <div class="project-intro-text">
+        <p>Created during my time in the Boulder Technical Education Center's video production program, How She Hurt Me is a deeply personal short documentary about teen addiction — told through the metaphor of a toxic relationship.</p>
+        <p>The film explores the emotional grip of substance abuse by personifying addiction as a romantic partner: alluring, destructive, and impossible to fully forget. It was inspired by real losses — friends and peers I grew up with who died from overdoses.</p>
+        <p>This project was my way of making sense of it all — and more importantly, to start conversations about what so many teens go through in silence. It's a tribute, a warning, and a call for awareness.</p>
+      </div>
+      <div class="project-intro-details">
+        <p class="project-detail-label">Type</p>
+        <p>Short Documentary</p>
+        <p class="project-detail-label">Program</p>
+        <p>Boulder Technical Education Center — Video Production</p>
+        <p class="project-detail-label">Subject</p>
+        <p>Teen addiction told through metaphor</p>
+      </div>
+    </div>
+
+    <!-- VIDEO -->
+    <h2 class="section-heading">Watch the Film</h2>
+    <div class="video-wrap">
+      <iframe src="https://www-ccv.adobe.io/v1/player/ccv/QZZdPE3yq7R/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" allowfullscreen title="How She Hurt Me"></iframe>
+    </div>
+
+    <!-- NEXT -->
+    <div class="next-project">
+      <div>
+        <p class="next-project-label">Back to Start</p>
+        <a href="unique-communications-ireland.html">
+          <p class="next-project-title">Unique Communications →</p>
+        </a>
+      </div>
+      <a href="index.html" style="font-size:.8rem;opacity:.5;letter-spacing:.08em;text-transform:uppercase;">← All Projects</a>
+    </div>
+
+  </main>
+
+  <script>
+    const cursor=document.getElementById('cursor');let mx=-100,my=-100,cx=-100,cy=-100;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function loop(){cx+=(mx-cx)*.15;cy+=(my-cy)*.15;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,img').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('large'));el.addEventListener('mouseleave',()=>cursor.classList.remove('large'));});
+  </script>
+</body>
+</html>
