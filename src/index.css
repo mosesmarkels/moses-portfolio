@@ -1,0 +1,304 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #050510;
+}
+
+/* ── OVERLAY WRAPPER ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── HERO ── */
+.o-hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90vw, 960px);
+  text-align: center;
+  color: white;
+  font-family: 'Mulish', sans-serif;
+  will-change: opacity, transform;
+}
+
+.o-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 9vw, 116px);
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #c2e9fb, #a1c4fd 35%, #ffecd2 65%, #fcb69f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.o-hero .tagline {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 52px;
+}
+
+.o-hero .scroll-hint {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+  animation: pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.22; transform: translateY(0); }
+  50%       { opacity: 0.65; transform: translateY(5px); }
+}
+
+/* ── PROJECT CARDS ── */
+.o-card {
+  position: absolute;
+  top: 50%;
+  width: 420px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.o-card a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  background: rgba(6, 6, 22, 0.82);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 8px 40px rgba(0,0,0,0.5),
+    0 0 50px -12px var(--accent),
+    0 0 100px -24px var(--accent);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.o-card:hover a {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.09) inset,
+    0 8px 40px rgba(0,0,0,0.6),
+    0 0 80px -10px var(--accent),
+    0 0 140px -20px var(--accent);
+  transform: translateY(-4px);
+}
+
+/* Project number badge */
+.card-num {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  opacity: 0.7;
+  z-index: 2;
+}
+
+/* Image — 16:9 aspect ratio, no hard crop */
+.card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.55s ease;
+}
+
+.o-card:hover .card-img img {
+  transform: scale(1.05);
+}
+
+/* Card text */
+.card-body {
+  padding: 20px 22px 24px;
+  font-family: 'Mulish', sans-serif;
+  position: relative;
+}
+
+.card-body h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-bottom: 10px;
+  line-height: 1.05;
+}
+
+.tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.tags span {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 99px;
+  color: rgba(255,255,255,0.45);
+}
+
+.view-link {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.65;
+  transition: opacity 0.2s;
+}
+
+.o-card:hover .view-link { opacity: 1; }
+
+/* ── CONTACT ── */
+.o-contact {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+  font-family: 'Mulish', sans-serif;
+}
+
+.contact-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 18px;
+}
+
+.o-contact h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 7vw, 88px);
+  letter-spacing: 0.03em;
+  line-height: 0.95;
+  margin-bottom: 40px;
+  background: linear-gradient(135deg, #c2e9fb, #fcb69f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 13px 34px;
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 999px;
+  color: white;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-family: 'Mulish', sans-serif;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+  margin-bottom: 36px;
+  display: block;
+  width: fit-content;
+  margin: 0 auto 36px;
+}
+
+.cta-btn:hover {
+  background: white;
+  color: #050510;
+  border-color: white;
+}
+
+.footer-links {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: white; }
+
+/* ── FIXED UI CHROME ── */
+.site-logo {
+  position: fixed;
+  top: 26px;
+  left: 32px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 50%;
+  right: 26px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.scroll-progress .label {
+  writing-mode: vertical-rl;
+  font-family: 'Mulish', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+.scroll-progress .track {
+  width: 1px;
+  height: 90px;
+  background: rgba(255,255,255,0.08);
+  position: relative;
+}
+
+.scroll-progress .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255,0.6);
+  transition: height 0.08s linear;
+}
