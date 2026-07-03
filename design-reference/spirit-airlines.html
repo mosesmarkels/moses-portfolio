@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spirit Airlines — Moses Markels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,700;1,300&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="project.css">
+  <style>
+    /* Page-specific extras */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 60px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 32px 24px;
+      border-radius: 8px;
+    }
+    .stat-card .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: .02em;
+      line-height: 1;
+      background: linear-gradient(135deg, #c2e9fb, #fcb69f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .stat-card p { font-size: .85rem; font-weight: 300; color: rgba(255,255,255,.6); line-height: 1.5; }
+
+    .quote-block {
+      border-left: 2px solid rgba(255,255,255,.2);
+      padding: 20px 28px;
+      margin: 16px 0;
+      font-size: 1rem;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255,255,255,.75);
+      line-height: 1.7;
+    }
+    .quote-note { font-size: .8rem; color: var(--muted); margin-top: 6px; font-style: normal; }
+
+    .persona-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: start;
+      margin-bottom: 60px;
+    }
+    .persona-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c2e9fb, #fcb69f);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: #111;
+      flex-shrink: 0;
+    }
+    .persona-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: .02em;
+      margin-bottom: 4px;
+    }
+    .persona-subtitle { font-size: .8rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 16px; }
+    .persona-body { font-size: .95rem; font-weight: 300; line-height: 1.8; color: rgba(255,255,255,.8); }
+    .persona-body p + p { margin-top: 12px; }
+
+    .price-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .price-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: 32px;
+    }
+    .price-card.spirit { border-color: rgba(255, 220, 100, .3); }
+    .price-card.southwest { border-color: rgba(255,255,255,.1); }
+    .price-airline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: .02em;
+      margin-bottom: 20px;
+    }
+    .price-card.spirit .price-airline { color: #FFD964; }
+    .price-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem;
+      font-weight: 300;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      color: rgba(255,255,255,.7);
+    }
+    .price-line:last-child { border-bottom: none; font-weight: 700; color: #fff; }
+    .price-total {
+      font-size: 1.1rem;
+      margin-top: 8px;
+    }
+
+    .callout {
+      background: linear-gradient(135deg, rgba(194,233,251,.08), rgba(252,182,159,.08));
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 60px;
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,255,255,.9);
+    }
+    .callout strong { font-weight: 700; }
+
+    @media (max-width: 768px) {
+      .stat-grid { grid-template-columns: 1fr; }
+      .price-compare { grid-template-columns: 1fr; }
+      .persona-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-bg"></div>
+  <div class="cursor" id="cursor"></div>
+
+  <header>
+    <a href="index.html" class="logo">Moses Markels</a>
+    <nav><ul>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul></nav>
+  </header>
+
+  <a href="index.html" class="back-btn">← Back</a>
+
+  <!-- HERO -->
+  <section class="project-hero">
+    <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/8de286a8-e96d-48a6-bd39-cc2c83c86128_rw_1200.jpg?h=2f45367bd80f0d88a0b2d8c1c5108d0a" alt="Spirit Airlines">
+    <div class="project-hero-content">
+      <h1 class="project-hero-title">Spirit Airlines</h1>
+      <div class="project-hero-meta">
+        <span class="project-tag">Advertising</span>
+        <span class="project-tag">Brand Strategy</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="project-content">
+
+    <!-- INTRO -->
+    <div class="project-intro">
+      <div class="project-intro-text">
+        <p>Spirit Airlines built its brand on low fares, but after a failed JetBlue merger, bankruptcy headlines, and media-fueled fear around flight safety, trust took a nosedive (no pun intended). With routes slashed and ticket sales slipping, Spirit isn't just battling competitors — it's battling perception.</p>
+        <p>To challenge this, Spirit needs to go all in on <strong>transparency</strong>.</p>
+      </div>
+      <div class="project-intro-details">
+        <p class="project-detail-label">Type</p>
+        <p>Advertising Campaign / Brand Strategy</p>
+        <p class="project-detail-label">Objective</p>
+        <p>Rebuild trust and reposition Spirit as the smartest way to fly on a budget</p>
+        <p class="project-detail-label">Approach</p>
+        <p>Own the low-cost model with radical transparency and honesty</p>
+      </div>
+    </div>
+
+    <!-- THE CHALLENGE -->
+    <h2 class="section-heading">The Challenge</h2>
+    <div class="text-block">
+      <p>People don't trust the brand, and they confuse <em>"cheap"</em> with <em>"unsafe."</em></p>
+      <p>My first impression: everyone loves to hate Spirit. The objective is clear — rebuild trust and reposition Spirit as the smartest way to fly on a budget.</p>
+    </div>
+    <div class="image-grid cols-1">
+      <img class="wide" src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/25dac298-50f9-456a-adae-bbf13a6cd757_rw_3840.png?h=8087c780665df521244706e58f0ae041" alt="The Challenge overview">
+    </div>
+
+    <!-- AUDIENCE -->
+    <h2 class="section-heading">Who We're Speaking To</h2>
+    <div class="text-block">
+      <p>We're not speaking to luxury travelers. We're speaking to the ones who fly with purpose, not perks.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-number">47%</div>
+        <p>18–34 year olds are more likely to fly Spirit than the general population. Side hustlers, gig workers, and creators who know how to stretch a dollar.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">58%</div>
+        <p>of Spirit flyers are men. Less brand loyalty, more price sensitivity. They book what makes sense, not what sounds fancy.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">48%</div>
+        <p>fall into the lower third of monthly income. Calculated spenders — not broke, just budget-savvy.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      They're <strong>frequent flyers</strong>, not frequent complainers. They're <strong>destination-focused</strong>, deliberate, and decisive. They know that free snacks aren't really free, and they'd rather keep the $75.
+    </div>
+
+    <div class="image-grid cols-2">
+      <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/3ac624dc-edbf-46f0-8cef-d54fcf06186c_rw_1920.png?h=2341cc3f766ed0b92e680c6ea6ccf169" alt="Audience insights">
+      <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/e30f8fa7-93b3-4ccf-a6cb-c1f09756e39d_rw_1200.png?h=682aa33e6449a2f699408328db26c1d1" alt="Audience data">
+    </div>
+
+    <!-- RESEARCH -->
+    <h2 class="section-heading">What They're Saying</h2>
+    <div class="text-block">
+      <p>We talked to college students and others who fit Spirit's demo about how they see budget airlines. Here's what we heard:</p>
+    </div>
+
+    <div class="quote-block">
+      "It ends up costing the same as a regular airline. You get tricked by the low price, then pay for everything else."
+      <p class="quote-note">They feel misled — not by the price, but by the lack of transparency.</p>
+    </div>
+    <div class="quote-block">
+      "I never trusted Spirit. It just feels sketchy."
+      <p class="quote-note">They're skeptical. Even if they've never had a bad experience, the brand's reputation does the damage.</p>
+    </div>
+    <div class="quote-block">
+      "I'd rather pay more upfront than worry about getting nickel-and-dimed."
+      <p class="quote-note">They want control. Not more freebies. Just fewer surprises.</p>
+    </div>
+
+    <!-- PERSONA -->
+    <h2 class="section-heading">Meet the Target</h2>
+    <div class="persona-card">
+      <div class="persona-avatar">JR</div>
+      <div>
+        <p class="persona-name">Josh Rivera</p>
+        <p class="persona-subtitle">Age 24 · Fort Lauderdale, FL · Wedding Photographer</p>
+        <div class="persona-body">
+          <p>Josh is part creative, part entrepreneur, and he's building his business one flight at a time. He books gigs across the country, travels light, and edits on the go. His schedule is flexible, but his income isn't always steady. That means every trip has to make sense — financially and logistically.</p>
+          <p>Josh has flown Spirit before. He knows what he's getting, but he still hesitates. Not because of the service, but because of the <em>uncertainty</em>. Is he going to get hit with surprise fees? Is the plane safe? Is it worth it?</p>
+          <p>He doesn't need a drink cart or complimentary pretzels. He needs a brand that levels with him. Josh doesn't want upgrades. He wants <strong>clarity</strong>. And that's what builds trust.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="image-grid cols-2">
+      <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/cba8cd26-d586-4b50-a3e9-7f9cdd83fcf2_rw_1200.png?h=0d1cf3147bffee741f3aeb31c1390f4e" alt="Persona research">
+      <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/5e80befb-ca53-4eb7-9afe-4d16083aca59_rw_1200.png?h=c9700cee01e945cfd1e5fb18809d28e4" alt="Persona insights">
+    </div>
+
+    <!-- THE TRUTH -->
+    <h2 class="section-heading">The Truth: Spirit Isn't Cutting Corners. They're Cutting Nonsense.</h2>
+    <div class="text-block">
+      <p>How much does a soda really cost? A $251 Southwest flight includes free soda, snacks, and a checked bag. A $176 Spirit flight doesn't. But here's the twist: you're still paying for it either way.</p>
+    </div>
+
+    <div class="price-compare">
+      <div class="price-card spirit">
+        <p class="price-airline">✈ Spirit Airlines</p>
+        <div class="price-line"><span>Base fare</span><span>$122</span></div>
+        <div class="price-line"><span>Checked bag (round-trip)</span><span>$50</span></div>
+        <div class="price-line"><span>Soda</span><span>$4</span></div>
+        <div class="price-line"><span>Personal item</span><span>Included</span></div>
+        <div class="price-line price-total"><span>Total</span><span>$176</span></div>
+      </div>
+      <div class="price-card southwest">
+        <p class="price-airline">✈ Southwest Airlines</p>
+        <div class="price-line"><span>Base fare</span><span>$251</span></div>
+        <div class="price-line"><span>Checked bag</span><span>Included</span></div>
+        <div class="price-line"><span>Soda + snacks</span><span>Included</span></div>
+        <div class="price-line"><span>Personal item</span><span>Included</span></div>
+        <div class="price-line price-total"><span>Total</span><span>$251.96</span></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      That's a <strong>$75 soda.</strong> Spirit didn't charge you less because they cut corners. They charged you less because they didn't assume you needed everything — and even if you did, this flight is still cheaper.
+    </div>
+
+    <!-- CAMPAIGN WORK -->
+    <h2 class="section-heading">The Work</h2>
+    <div class="text-block">
+      <p>Not free snacks. Not fake luxury. We're selling <strong>clarity</strong>. Control. And choice. Spirit isn't the airline you settle for — it's the airline you <em>understand</em>. Because when you know what you're paying for, you're not flying cheap. You're flying smart.</p>
+    </div>
+
+    <div class="image-grid cols-2">
+      <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/b9a7cd76-278b-4a7c-8e75-e62efce9f44a_rw_1200.png?h=6e57868ef92148c38ae1da65de646af3" alt="Campaign work 1">
+      <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/247ea07f-34e3-4b91-b835-bd789d64af31_rw_1200.png?h=abdf47119511123ebba21784f6fc6592" alt="Campaign work 2">
+      <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/01a14d86-7963-452e-8fe1-71f4d6d36b72_rw_1200.png?h=2acefb411757c2111bfb4ea06b19179b" alt="Campaign work 3">
+      <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/3c2da686-6d4d-4876-b636-ac6b961c87c4_rw_1200.png?h=3ec08f98d753911023e3ac0c3a09b516" alt="Campaign work 4">
+    </div>
+    <div class="image-grid cols-1">
+      <img class="wide" src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/26ce4d1a-5133-4ff1-b714-2d934ca82a53_rw_1200.png?h=22fef03b890a4099353ce19162fbe8cd" alt="Campaign final spread">
+    </div>
+
+    <!-- NEXT -->
+    <div class="next-project">
+      <div>
+        <p class="next-project-label">Next Project</p>
+        <a href="betting-the-future.html">
+          <p class="next-project-title">Betting the Future →</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const cursor=document.getElementById('cursor');
+    let mx=-100,my=-100,cx=-100,cy=-100;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function loop(){cx+=(mx-cx)*.15;cy+=(my-cy)*.15;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,img').forEach(el=>{
+      el.addEventListener('mouseenter',()=>cursor.classList.add('large'));
+      el.addEventListener('mouseleave',()=>cursor.classList.remove('large'));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Moses Markels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="project.css">
+  <style>
+    /* ── ABOUT HERO ── */
+    .about-hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 64px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 140px 64px 80px;
+    }
+    .about-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 26px;
+    }
+    .about-name {
+      font-family: var(--font-display);
+      font-size: clamp(72px, 10vw, 156px);
+      line-height: .86;
+      letter-spacing: .02em;
+      background: linear-gradient(108deg,#5b8cff,#b06bff 42%,#ff5fa8 72%,#ffb347);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .about-roles {
+      font-size: .8rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      margin-top: 22px;
+    }
+    .about-lead {
+      font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+      font-weight: 300;
+      line-height: 1.6;
+      color: #fff;
+      margin-top: 40px;
+      max-width: 30ch;
+      text-wrap: pretty;
+    }
+    .about-portrait {
+      width: 100%;
+      aspect-ratio: 4/5;
+      display: block;
+      box-shadow: 0 30px 90px -30px rgba(91,140,255,.55), 0 20px 60px -30px rgba(255,95,168,.5);
+    }
+
+    /* ── BODY ── */
+    .about-body {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 64px 40px;
+    }
+    .about-split {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 64px;
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+    .about-split h2 {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3.4vw, 46px);
+      line-height: 1;
+      letter-spacing: .01em;
+      color: #fff;
+    }
+    .about-split .accent { color: #ff5fa8; }
+    .about-split p {
+      font-size: clamp(1rem, 1.3vw, 1.12rem);
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(255,255,255,.82);
+    }
+    .about-split p + p { margin-top: 20px; }
+    .about-split em { font-style: italic; color: #fff; }
+    .about-split strong { font-weight: 700; color: #fff; }
+
+    /* ── FACTS ── */
+    .fact-list { display: flex; flex-direction: column; gap: 24px; }
+    .fact-label {
+      font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .fact-value { font-size: .98rem; font-weight: 400; color: rgba(255,255,255,.9); }
+
+    /* ── WORK CTAs ── */
+    .work-cta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+    .cta-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 240px;
+      padding: 36px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.03);
+      overflow: hidden;
+      transition: transform .4s ease, border-color .4s ease;
+    }
+    .cta-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(120% 120% at 100% 0%, var(--glow) 0%, transparent 55%);
+      opacity: .5;
+      transition: opacity .4s ease;
+      pointer-events: none;
+    }
+    .cta-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,.25); }
+    .cta-card:hover::after { opacity: 1; }
+    .cta-kind {
+      font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); position: relative; z-index: 1;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: .96;
+      letter-spacing: .01em;
+      color: #fff;
+      position: relative; z-index: 1;
+    }
+    .cta-arrow { font-size: 1.1rem; color: rgba(255,255,255,.7); position: relative; z-index: 1; }
+
+    /* ── CONTACT ── */
+    .about-contact {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 90px 64px 130px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .about-contact .eyebrow {
+      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 20px;
+    }
+    .about-contact h2 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: .92;
+      letter-spacing: .02em;
+      margin-bottom: 36px;
+      background: linear-gradient(108deg,#5b8cff,#ff5fa8 55%,#ffb347);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .email-btn {
+      display: inline-block;
+      padding: 15px 40px;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 999px;
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #fff;
+      transition: background .25s, color .25s, border-color .25s;
+      margin-bottom: 36px;
+    }
+    .email-btn:hover { background: #fff; color: #08060f; border-color: #fff; }
+    .social-row { display: flex; gap: 30px; justify-content: center; }
+    .social-row a {
+      font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(255,255,255,.45); transition: color .2s;
+    }
+    .social-row a:hover { color: #fff; }
+
+    @media (max-width: 900px) {
+      .about-hero { grid-template-columns: 1fr; gap: 48px; padding: 110px 24px 60px; }
+      .about-portrait { max-width: 380px; }
+      .about-body, .about-contact { padding-left: 24px; padding-right: 24px; }
+      .about-split { grid-template-columns: 1fr; gap: 28px; }
+      .work-cta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-bg"></div>
+  <div class="cursor" id="cursor"></div>
+
+  <header>
+    <a href="index.html" class="logo">Moses Markels</a>
+    <nav><ul>
+      <li><a href="index.html">Work</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul></nav>
+  </header>
+
+  <a href="index.html" class="back-btn">← Back</a>
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div>
+      <p class="about-eyebrow">About · Boulder, Colorado</p>
+      <h1 class="about-name">Moses<br>Markels</h1>
+      <p class="about-roles">Storyteller · Creative Strategist</p>
+      <p class="about-lead">I'm not just here to sell you soda water disguised as personality. I'm here to build brands people actually trust.</p>
+    </div>
+    <div class="about-portrait" style="overflow:hidden;border-radius:18px;border:1px solid rgba(255,255,255,.14)">
+      <img src="moses-portrait.jpg" alt="Moses Markels" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block">
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <div class="about-body">
+
+    <div class="about-split">
+      <h2>Strategy meets <span class="accent">story.</span></h2>
+      <div>
+        <p>I live at the intersection of strategy and creativity. Whether it's crafting campaigns that change perception or creating short documentaries that tug on your heartstrings, storytelling is at the core of everything I do.</p>
+        <p>My work's been shown at festivals, in classrooms, and once, on my grandma's Facebook feed with <strong>47 likes</strong>.</p>
+        <p>I've made multiple short documentaries — because while I love a smart tagline, I also believe some stories need more than <em>30 seconds</em>.</p>
+      </div>
+    </div>
+
+    <div class="about-split">
+      <div class="fact-list">
+        <div>
+          <p class="fact-label">Based in</p>
+          <p class="fact-value">Boulder, Colorado</p>
+        </div>
+        <div>
+          <p class="fact-label">Disciplines</p>
+          <p class="fact-value">Brand Strategy · Advertising · Documentary · Short Film</p>
+        </div>
+        <div>
+          <p class="fact-label">Believes in</p>
+          <p class="fact-value">Brands people actually trust</p>
+        </div>
+        <div>
+          <p class="fact-label">Currently</p>
+          <p class="fact-value">Open to new projects</p>
+        </div>
+      </div>
+      <div>
+        <p>Some of it lives in 30-second cuts. Some of it lives in ten-minute films. All of it starts the same way — with a person, a truth, and a reason to care.</p>
+        <p>Two bodies of work, one throughline:</p>
+      </div>
+    </div>
+
+    <!-- WORK CTAs -->
+    <div class="work-cta">
+      <a href="index.html" class="cta-card" style="--glow: rgba(91,140,255,.35)">
+        <p class="cta-kind">Advertising &amp; Strategy</p>
+        <p class="cta-title">The campaign<br>work</p>
+        <p class="cta-arrow">Explore →</p>
+      </a>
+      <a href="index.html" class="cta-card" style="--glow: rgba(255,95,168,.35)">
+        <p class="cta-kind">Documentary &amp; Short Film</p>
+        <p class="cta-title">The film<br>work</p>
+        <p class="cta-arrow">Explore →</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="about-contact" id="contact">
+    <p class="eyebrow">Get in touch</p>
+    <h2>Let's work<br>together</h2>
+    <a class="email-btn" href="mailto:mosesm2022@gmail.com">Drop me an email ↗</a>
+    <div class="social-row">
+      <a href="https://www.instagram.com/momoses15" target="_blank" rel="noreferrer">Instagram</a>
+      <a href="https://www.linkedin.com/in/moses-markels/" target="_blank" rel="noreferrer">LinkedIn</a>
+    </div>
+  </section>
+
+  <script>
+    const cursor=document.getElementById('cursor');
+    let mx=-100,my=-100,cx=-100,cy=-100;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function loop(){cx+=(mx-cx)*.15;cy+=(my-cy)*.15;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,img').forEach(el=>{
+      el.addEventListener('mouseenter',()=>cursor.classList.add('large'));
+      el.addEventListener('mouseleave',()=>cursor.classList.remove('large'));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advice from Strangers — Moses Markels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+  <div class="noise-bg"></div>
+  <div class="cursor" id="cursor"></div>
+
+  <header>
+    <a href="index.html" class="logo">Moses Markels</a>
+    <nav><ul>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul></nav>
+  </header>
+
+  <a href="index.html" class="back-btn">← Back</a>
+
+  <!-- HERO -->
+  <section class="project-hero">
+    <img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/a1a124ca-b84e-40a9-87fc-db7ebd1bcb85_rwc_158x0x2182x1706x2182.png?h=c204b1d662ee9ebe74f1e67d5877a2ff" alt="Advice from Strangers">
+    <div class="project-hero-content">
+      <h1 class="project-hero-title">Advice from Strangers</h1>
+      <div class="project-hero-meta">
+        <span class="project-tag">Short Film</span>
+        <span class="project-tag">Documentary</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="project-content">
+
+    <!-- INTRO -->
+    <div class="project-intro">
+      <div class="project-intro-text">
+        <p>Advice from Strangers is a light, heartwarming short film born from a simple idea: What if we just asked people for one piece of advice?</p>
+        <p>A friend and I hit the Pearl Street Mall in Boulder with a camera and a question. The responses were spontaneous, funny, wise, and surprisingly human. There's no narrator. No agenda. Just strangers sharing real thoughts in a moment of connection.</p>
+      </div>
+      <div class="project-intro-details">
+        <p class="project-detail-label">Type</p>
+        <p>Short Documentary</p>
+        <p class="project-detail-label">Location</p>
+        <p>Pearl Street Mall, Boulder, CO</p>
+        <p class="project-detail-label">Style</p>
+        <p>Observational / Vérité</p>
+      </div>
+    </div>
+
+    <!-- VIDEO -->
+    <h2 class="section-heading">Watch the Film</h2>
+    <div class="video-wrap">
+      <iframe src="https://www-ccv.adobe.io/v1/player/ccv/7Xk8Nyngy6q/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" allowfullscreen title="Advice from Strangers"></iframe>
+    </div>
+
+    <!-- NEXT -->
+    <div class="next-project">
+      <div>
+        <p class="next-project-label">Next Project</p>
+        <a href="success.html">
+          <p class="next-project-title">Success. →</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const cursor=document.getElementById('cursor');let mx=-100,my=-100,cx=-100,cy=-100;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function loop(){cx+=(mx-cx)*.15;cy+=(my-cy)*.15;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,img').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('large'));el.addEventListener('mouseleave',()=>cursor.classList.remove('large'));});
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+/* ── Design tokens ── */
+:root {
+  --gradient-signature: linear-gradient(110deg, #5b8cff, #b06bff 40%, #ff5fa8 70%, #ffb347);
+  --font-display: 'Bebas Neue', Impact, sans-serif;
+  --font-body: 'Mulish', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  background: #08060f;
+  color: #fff;
+}
+a { color: inherit; }
+
+@keyframes pulseHint {
+  0%, 100% { opacity: .22; transform: translateY(0); }
+  50% { opacity: .7; transform: translateY(5px); }
+}
+@keyframes ring {
+  0% { box-shadow: 0 0 0 1px currentColor; opacity: .85; }
+  100% { box-shadow: 0 0 0 20px transparent; opacity: 0; }
+}
+
+/* Respect the OS-level "reduce motion" accessibility setting: stop looping
+   CSS animations and cut transition times to effectively instant. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

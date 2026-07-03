@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Mulish:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script>if(!window.THREE&&!window.__threeLoading){window.__threeLoading=true;var __s=document.createElement('script');__s.src='https://unpkg.com/three@0.128.0/build/three.min.js';document.head.appendChild(__s);}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    @keyframes pulseHint{0%,100%{opacity:.22;transform:translateY(0)}50%{opacity:.7;transform:translateY(5px)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .o-card a:hover{transform:translateY(-5px)}
+    .o-card a{transition:transform .4s ease, box-shadow .4s ease}
+    .o-card .card-img img{transition:transform .6s ease}
+    .o-card a:hover .card-img img{transform:scale(1.06)}
+    .o-card a:hover .view-link{opacity:1}
+    .mode-btn{transition:color .25s, background .25s, border-color .25s}
+    .cta-btn:hover{background:#fff;color:#08060f;border-color:#fff}
+    .footer-links a:hover{color:#fff}
+    .nav-dot{transition:transform .3s, background .3s}
+    .o-dot{position:absolute;left:0;top:0;width:13px;height:13px;border-radius:50%;background:currentColor;transform:translate(-9999px,-9999px);pointer-events:none;box-shadow:0 0 14px currentColor;opacity:0;transition:opacity .25s}
+    .o-dot::after{content:'';position:absolute;inset:0;border-radius:50%;animation:ring 1.9s ease-out infinite}
+    @keyframes ring{0%{box-shadow:0 0 0 1px currentColor;opacity:.85}100%{box-shadow:0 0 0 20px transparent;opacity:0}}
+  </style>
+</helmet>
+<div ref="{{ scrollRef }}" style="position:fixed;inset:0;height:100vh;overflow-y:scroll;overflow-x:hidden;background:#08060f;font-family:'Mulish',sans-serif;-webkit-font-smoothing:antialiased">
+
+  <!-- pinned stage -->
+  <div style="position:sticky;top:0;height:100vh;width:100%;overflow:hidden">
+    <canvas ref="{{ canvasRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+
+    <!-- overlay UI -->
+    <div ref="{{ overlayRef }}" style="position:absolute;inset:0;pointer-events:none;z-index:10">
+
+      <!-- top chrome -->
+      <div style="position:absolute;top:24px;left:32px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55)">Moses Markels</div>
+      <a href="about.html" style="position:absolute;top:22px;right:32px;pointer-events:all;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 2px;transition:color .25s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">About →</a>
+
+      <!-- scroll progress -->
+      <div style="position:absolute;top:50%;right:26px;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:12px">
+        <span style="writing-mode:vertical-rl;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3)">Scroll</span>
+        <div style="width:2px;height:110px;background:rgba(255,255,255,.1);position:relative;border-radius:2px;overflow:hidden">
+          <div class="o-fill" style="position:absolute;top:0;left:0;right:0;height:0%;background:linear-gradient(#fff,rgba(255,255,255,.4))"></div>
+        </div>
+      </div>
+
+      <!-- ABOUT INTRO SCRIM (dims 3D behind the intro, clears as you zoom in) -->
+      <div class="o-scrim" style="position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 46%,rgba(8,6,20,.62) 0%,rgba(8,6,20,.34) 45%,rgba(8,6,20,0) 78%);will-change:opacity;pointer-events:none"></div>
+
+      <!-- ABOUT INTRO (the landing — you scroll to zoom through it into the work) -->
+      <div class="o-hero" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transform-origin:50% 50%;width:min(94vw,1080px);display:flex;align-items:center;justify-content:center;gap:clamp(28px,4vw,64px);color:#fff;will-change:opacity,transform">
+        <!-- portrait -->
+        <a href="about.html" style="flex:0 0 auto;pointer-events:all;display:block;position:relative;width:clamp(180px,20vw,290px);aspect-ratio:41/58;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.16);box-shadow:0 30px 90px -30px rgba(91,140,255,.6),0 22px 70px -34px rgba(255,95,168,.55);transition:transform .4s ease" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+          <img src="moses-portrait.jpg" alt="Moses Markels" style="width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block">
+        </a>
+        <!-- text -->
+        <div style="text-align:left;max-width:520px">
+          <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:20px">About · Boulder, Colorado</div>
+          <a href="about.html" style="pointer-events:all;text-decoration:none;display:inline-block" onmouseover="this.querySelector('.name-u').style.width='100%'" onmouseout="this.querySelector('.name-u').style.width='0%'">
+            <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8.2vw,120px);line-height:.84;letter-spacing:.03em;background:linear-gradient(110deg,#5b8cff,#b06bff 40%,#ff5fa8 70%,#ffb347);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Moses<br>Markels</h1>
+            <span class="name-u" style="display:block;height:2px;width:0%;margin-top:10px;background:linear-gradient(90deg,#5b8cff,#ff5fa8);transition:width .4s ease"></span>
+          </a>
+          <p style="font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:18px">Storyteller&nbsp;·&nbsp;Creative Strategist</p>
+          <p style="font-size:clamp(1rem,1.5vw,1.28rem);font-weight:300;line-height:1.6;color:#fff;margin-top:26px;text-wrap:pretty">I'm not just here to sell you soda water disguised as personality. I'm here to build brands people actually trust.</p>
+          <a href="about.html" style="pointer-events:all;display:inline-block;margin-top:22px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:3px;transition:color .25s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Read the full story →</a>
+          <p style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-top:34px;animation:pulseHint 2.8s ease-in-out infinite">↓ &nbsp;Scroll to enter the work</p>
+        </div>
+      </div>
+
+      <!-- PROJECT CARDS -->
+      <div class="o-card" data-i="0" data-side="left" style="--accent:#5b8cff;position:absolute;top:50%;left:32%;width:min(40vw,430px);transform:translate(-50%,-50%);opacity:0;will-change:opacity,transform">
+        <a href="unique-communications-ireland.html" style="display:block;color:#fff;text-decoration:none;background:rgba(8,6,20,.78);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;backdrop-filter:blur(18px);box-shadow:0 10px 50px rgba(0,0,0,.55),0 0 70px -16px var(--accent),0 0 120px -30px var(--accent);pointer-events:all">
+          <div style="position:absolute;top:16px;right:18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--accent);opacity:.85;z-index:2">01</div>
+          <div class="card-img" style="width:100%;aspect-ratio:16/9;overflow:hidden"><img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/33856e49-859b-4d6c-9844-508c6593e0ca_rwc_30x0x1343x1050x1343.png?h=37540086319c153b056fae852e667901" alt="Unique Communications Ireland" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block"></div>
+          <div style="padding:20px 22px 24px">
+            <h2 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.04em;color:var(--accent);line-height:1.04;margin-bottom:11px">Unique Communications Ireland</h2>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Advertising</span>
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Script Writing</span>
+            </div>
+            <span class="view-link" style="font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);opacity:.65;transition:opacity .2s">View Project →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="o-card" data-i="1" data-side="right" style="--accent:#ff7a18;position:absolute;top:50%;left:68%;width:min(40vw,430px);transform:translate(-50%,-50%);opacity:0;will-change:opacity,transform">
+        <a href="spirit-airlines.html" style="display:block;color:#fff;text-decoration:none;background:rgba(8,6,20,.78);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;backdrop-filter:blur(18px);box-shadow:0 10px 50px rgba(0,0,0,.55),0 0 70px -16px var(--accent),0 0 120px -30px var(--accent);pointer-events:all">
+          <div style="position:absolute;top:16px;right:18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--accent);opacity:.85;z-index:2">02</div>
+          <div class="card-img" style="width:100%;aspect-ratio:16/9;overflow:hidden"><img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/9170a7e4-481d-409e-a08e-2d4e7df83df2_car_202x158.jpg?h=22463b824e8e1fa021267df9cc6a4e08" alt="Spirit Airlines" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block"></div>
+          <div style="padding:20px 22px 24px">
+            <h2 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.04em;color:var(--accent);line-height:1.04;margin-bottom:11px">Spirit Airlines</h2>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Advertising</span>
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Brand Strategy</span>
+            </div>
+            <span class="view-link" style="font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);opacity:.65;transition:opacity .2s">View Project →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="o-card" data-i="2" data-side="left" style="--accent:#b6ff3b;position:absolute;top:50%;left:32%;width:min(40vw,430px);transform:translate(-50%,-50%);opacity:0;will-change:opacity,transform">
+        <a href="betting-the-future.html" style="display:block;color:#fff;text-decoration:none;background:rgba(8,6,20,.78);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;backdrop-filter:blur(18px);box-shadow:0 10px 50px rgba(0,0,0,.55),0 0 70px -16px var(--accent),0 0 120px -30px var(--accent);pointer-events:all">
+          <div style="position:absolute;top:16px;right:18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--accent);opacity:.85;z-index:2">03</div>
+          <div class="card-img" style="width:100%;aspect-ratio:16/9;overflow:hidden"><img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/b04d0381-5731-4927-b41b-7bbe76577faa_rwc_295x0x1550x1212x1550.png?h=6653bde4443ad7c263b5a1656210049b" alt="Betting the Future" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block"></div>
+          <div style="padding:20px 22px 24px">
+            <h2 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.04em;color:var(--accent);line-height:1.04;margin-bottom:11px">Betting the Future</h2>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Documentary</span>
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Short Film</span>
+            </div>
+            <span class="view-link" style="font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);opacity:.65;transition:opacity .2s">View Project →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="o-card" data-i="3" data-side="right" style="--accent:#ff2bd1;position:absolute;top:50%;left:68%;width:min(40vw,430px);transform:translate(-50%,-50%);opacity:0;will-change:opacity,transform">
+        <a href="advice-from-strangers.html" style="display:block;color:#fff;text-decoration:none;background:rgba(8,6,20,.78);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;backdrop-filter:blur(18px);box-shadow:0 10px 50px rgba(0,0,0,.55),0 0 70px -16px var(--accent),0 0 120px -30px var(--accent);pointer-events:all">
+          <div style="position:absolute;top:16px;right:18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--accent);opacity:.85;z-index:2">04</div>
+          <div class="card-img" style="width:100%;aspect-ratio:16/9;overflow:hidden"><img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/a1a124ca-b84e-40a9-87fc-db7ebd1bcb85_rwc_158x0x2182x1706x2182.png?h=c204b1d662ee9ebe74f1e67d5877a2ff" alt="Advice from Strangers" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block"></div>
+          <div style="padding:20px 22px 24px">
+            <h2 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.04em;color:var(--accent);line-height:1.04;margin-bottom:11px">Advice from Strangers</h2>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Short Film</span>
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Documentary</span>
+            </div>
+            <span class="view-link" style="font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);opacity:.65;transition:opacity .2s">View Project →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="o-card" data-i="4" data-side="left" style="--accent:#18e0ff;position:absolute;top:50%;left:32%;width:min(40vw,430px);transform:translate(-50%,-50%);opacity:0;will-change:opacity,transform">
+        <a href="success.html" style="display:block;color:#fff;text-decoration:none;background:rgba(8,6,20,.78);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;backdrop-filter:blur(18px);box-shadow:0 10px 50px rgba(0,0,0,.55),0 0 70px -16px var(--accent),0 0 120px -30px var(--accent);pointer-events:all">
+          <div style="position:absolute;top:16px;right:18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--accent);opacity:.85;z-index:2">05</div>
+          <div class="card-img" style="width:100%;aspect-ratio:16/9;overflow:hidden"><img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/4a16ab0f-6a4f-4ee7-a9f5-e565bcc8f9af_rwc_59x0x2176x1702x2176.png?h=2f391a050df0cdd41247f5895df8a759" alt="Success." loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block"></div>
+          <div style="padding:20px 22px 24px">
+            <h2 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.04em;color:var(--accent);line-height:1.04;margin-bottom:11px">Success.</h2>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Personal Documentary</span>
+            </div>
+            <span class="view-link" style="font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);opacity:.65;transition:opacity .2s">View Project →</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="o-card" data-i="5" data-side="right" style="--accent:#9b5cff;position:absolute;top:50%;left:68%;width:min(40vw,430px);transform:translate(-50%,-50%);opacity:0;will-change:opacity,transform">
+        <a href="how-she-hurt-me.html" style="display:block;color:#fff;text-decoration:none;background:rgba(8,6,20,.78);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;backdrop-filter:blur(18px);box-shadow:0 10px 50px rgba(0,0,0,.55),0 0 70px -16px var(--accent),0 0 120px -30px var(--accent);pointer-events:all">
+          <div style="position:absolute;top:16px;right:18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--accent);opacity:.85;z-index:2">06</div>
+          <div class="card-img" style="width:100%;aspect-ratio:16/9;overflow:hidden"><img src="https://cdn.myportfolio.com/b52faa1c-a2f9-40b2-b93b-004d5037c659/fa286626-04f0-48d2-b520-eab4fb9a6240_rwc_220x82x1518x1187x1518.png?h=74389eb4fdbabb02884e7a388746865c" alt="How She Hurt Me" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block"></div>
+          <div style="padding:20px 22px 24px">
+            <h2 style="font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.04em;color:var(--accent);line-height:1.04;margin-bottom:11px">How She Hurt Me</h2>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Short Film</span>
+              <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(255,255,255,.16);border-radius:99px;color:rgba(255,255,255,.5)">Documentary</span>
+            </div>
+            <span class="view-link" style="font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);opacity:.65;transition:opacity .2s">View Project →</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- HOTSPOT DOTS (anchored to 3D objects) -->
+      <div class="o-dots" style="position:absolute;inset:0;pointer-events:none">
+        <span class="o-dot" data-i="0" style="color:#5b8cff"></span>
+        <span class="o-dot" data-i="1" style="color:#ff7a18"></span>
+        <span class="o-dot" data-i="2" style="color:#b6ff3b"></span>
+        <span class="o-dot" data-i="3" style="color:#ff2bd1"></span>
+        <span class="o-dot" data-i="4" style="color:#18e0ff"></span>
+        <span class="o-dot" data-i="5" style="color:#9b5cff"></span>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="o-contact" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;opacity:0;will-change:opacity,transform;color:#fff">
+        <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:18px">Get in touch</p>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(54px,8vw,104px);line-height:.92;letter-spacing:.03em;margin-bottom:40px;background:linear-gradient(110deg,#5b8cff,#ff5fa8 55%,#ffb347);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Let's work<br>together</h2>
+        <a class="cta-btn" href="mailto:mosesm2022@gmail.com" style="display:inline-block;padding:14px 36px;border:1px solid rgba(255,255,255,.3);border-radius:999px;color:#fff;text-decoration:none;font-size:11px;letter-spacing:.14em;text-transform:uppercase;pointer-events:all;margin-bottom:34px">Drop me an email ↗</a>
+        <div class="footer-links" style="display:flex;gap:28px;justify-content:center;pointer-events:all">
+          <a href="https://www.instagram.com/momoses15" target="_blank" rel="noreferrer" style="color:rgba(255,255,255,.4);text-decoration:none;font-size:10px;letter-spacing:.14em;text-transform:uppercase">Instagram</a>
+          <a href="https://www.linkedin.com/in/moses-markels/" target="_blank" rel="noreferrer" style="color:rgba(255,255,255,.4);text-decoration:none;font-size:10px;letter-spacing:.14em;text-transform:uppercase">LinkedIn</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- scroll length spacer -->
+  <div style="height:680vh;width:1px;pointer-events:none"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.canvasRef = React.createRef();
+    this.overlayRef = React.createRef();
+    this.scrollRef = React.createRef();
+    this.state = { mode: 'cosmos' };
+    this.scroll = 0;
+    this.mouse = { x: 0, y: 0 };
+    this.animated = [];
+    this.projects = [];
+    this.pickMeshes = [];
+    this.hover = -1;
+    this.lockHover = false;
+  }
+
+  renderVals(){
+    return {
+      canvasRef: this.canvasRef,
+      overlayRef: this.overlayRef,
+      scrollRef: this.scrollRef,
+      setCosmos: () => this.setMode('cosmos'),
+      setOffice: () => this.setMode('office'),
+    };
+  }
+
+  setMode(m){
+    window.__setModeCalled = (window.__setModeCalled||0)+1; window.__lastMode = m;
+    if(m===this.state.mode) return;
+    this.state.mode = m;
+    this.setState({ mode: m });
+    this.syncButtons();
+    if(this.renderer) this.buildScene(m);
+  }
+
+  componentDidMount(){
+    this.CENTERS = [0.13,0.27,0.41,0.55,0.68,0.81];
+    this.HERO_OUT = 0.06; this.ZOOM_END = 0.12; this.CONTACT = 0.95; this.BELL = 0.075;
+    this.PALETTE = ['#5b8cff','#ff7a18','#b6ff3b','#ff2bd1','#18e0ff','#9b5cff'];
+    this.HREFS = ['unique-communications-ireland.html','spirit-airlines.html','betting-the-future.html','advice-from-strangers.html','success.html','how-she-hurt-me.html'];
+    const wait = () => {
+      if(!window.THREE){ this._t = setTimeout(wait, 60); return; }
+      this.initThree();
+      this.buildScene(this.state.mode);
+      this.attach();
+      this.start();
+    };
+    wait();
+  }
+
+  componentDidUpdate(_, prev){
+    if(prev.mode !== this.state.mode){
+      this.syncButtons();
+      if(this.renderer) this.buildScene(this.state.mode);
+    }
+  }
+
+  componentWillUnmount(){
+    cancelAnimationFrame(this.raf);
+    clearTimeout(this._t);
+    window.removeEventListener('resize', this._onResize);
+    const cv=this.canvasRef.current;
+    if(cv){ cv.removeEventListener('pointermove', this._cvMove); cv.removeEventListener('pointerleave', this._cvLeave); cv.removeEventListener('click', this._cvClick); }
+    if(this.renderer){ this.renderer.dispose(); }
+  }
+
+  // ---------- setup ----------
+  initThree(){
+    const T = window.THREE;
+    const canvas = this.canvasRef.current;
+    this.renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: false, preserveDrawingBuffer: true });
+    this.renderer.setPixelRatio(Math.min(2, window.devicePixelRatio||1));
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = T.PCFSoftShadowMap;
+    this.camera = new T.PerspectiveCamera(58, 1, 0.1, 400);
+    this.resize();
+    this.syncButtons();
+  }
+
+  resize(){
+    const c = this.canvasRef.current; if(!c) return;
+    const w = c.clientWidth||window.innerWidth, h = c.clientHeight||window.innerHeight;
+    this.renderer.setSize(w, h, false);
+    this.camera.aspect = w/h; this.camera.updateProjectionMatrix();
+  }
+
+  attach(){
+    const sc = this.scrollRef.current;
+    this._onScroll = () => {
+      const max = sc.scrollHeight - sc.clientHeight;
+      this.scroll = max>0 ? sc.scrollTop/max : 0;
+    };
+    sc.addEventListener('scroll', this._onScroll, { passive:true });
+    this._onMove = (e) => {
+      this.mouse.x = (e.clientX/window.innerWidth)*2-1;
+      this.mouse.y = (e.clientY/window.innerHeight)*2-1;
+    };
+    sc.addEventListener('mousemove', this._onMove);
+    this._onResize = () => this.resize();
+    window.addEventListener('resize', this._onResize);
+    // mode buttons
+    this.overlayRef.current.querySelectorAll('.mode-btn').forEach(b => {
+      b.addEventListener('click', () => this.setMode(b.dataset.mode));
+    });
+
+    // pickables: cache label + dot elements, set up raycaster
+    const ov = this.overlayRef.current;
+    this.cards = [...ov.querySelectorAll('.o-card')].sort((a,b)=>a.dataset.i-b.dataset.i);
+    this.dots  = [...ov.querySelectorAll('.o-dot')].sort((a,b)=>a.dataset.i-b.dataset.i);
+    this.ray = new window.THREE.Raycaster();
+    this.ndc = new window.THREE.Vector2(999,999);
+    const cv = this.canvasRef.current;
+    this._cvMove = (e)=>{ this._px=e.clientX; this._py=e.clientY; this.lockHover=false; };
+    cv.addEventListener('pointermove', this._cvMove);
+    this._cvLeave = ()=>{ this._px=null; this._py=null; };
+    cv.addEventListener('pointerleave', this._cvLeave);
+    this._cvClick = (e)=>{
+      const pi = this.pickAt(e.clientX, e.clientY);
+      if(pi>=0 && this.HREFS[pi]) window.location.href = this.HREFS[pi];
+    };
+    cv.addEventListener('click', this._cvClick);
+    // hovering a label highlights its 3D object
+    this.cards.forEach(card=>{ const i=+card.dataset.i;
+      card.addEventListener('mouseenter', ()=>{ this.hover=i; this.lockHover=true; });
+      card.addEventListener('mouseleave', ()=>{ this.lockHover=false; });
+    });
+  }
+
+  syncButtons(){
+    const ov = this.overlayRef.current; if(!ov) return;
+    ov.querySelectorAll('.mode-btn').forEach(b => {
+      const on = b.dataset.mode === this.state.mode;
+      b.style.background = on ? '#fff' : 'transparent';
+      b.style.color = on ? '#08060f' : '#fff';
+    });
+    // apply palette to card accents
+    ov.querySelectorAll('.o-card').forEach((card,i) => {
+      card.style.setProperty('--accent', this.PALETTE[i]);
+    });
+  }
+
+  // ---------- scene building ----------
+  clearScene(){
+    const s = this.scene;
+    if(!s) return;
+    while(s.children.length){
+      const o = s.children[0];
+      s.remove(o);
+      o.traverse && o.traverse(n => {
+        if(n.geometry) n.geometry.dispose();
+        if(n.material){ Array.isArray(n.material)?n.material.forEach(m=>m.dispose()):n.material.dispose(); }
+      });
+    }
+  }
+
+  buildScene(mode){
+    const T = window.THREE;
+    if(!this.scene) this.scene = new T.Scene();
+    this.clearScene();
+    this.animated = [];
+    this.projects = [];
+    this.pickMeshes = [];
+    this.hover = -1;
+    if(mode==='cosmos') this.buildCosmos(); else this.buildOffice();
+    this.resize();
+  }
+
+  addPick(mesh, i){ mesh.userData.pi = i; this.pickMeshes.push(mesh); }
+
+  // pick the on-screen project circle under a client point (zoom-independent)
+  pickAt(clientX, clientY){
+    const cv=this.canvasRef.current; if(!cv||!this.projects) return -1;
+    const r=cv.getBoundingClientRect();
+    const scaleX=cv.clientWidth/r.width, scaleY=cv.clientHeight/r.height;
+    const px=(clientX-r.left)*scaleX, py=(clientY-r.top)*scaleY;
+    let best=-1, bestD=Infinity;
+    this.projects.forEach(pr=>{
+      if(!pr._front) return;
+      const dx=px-pr._sx, dy=py-pr._sy, d=Math.hypot(dx,dy);
+      if(d<=(pr._sr||30) && d<bestD){ bestD=d; best=pr.i; }
+    });
+    return best;
+  }
+
+  // ---------- COSMOS ----------
+  buildCosmos(){
+    const T = window.THREE;
+    const s = this.scene;
+    s.background = new T.Color('#070512');
+    s.fog = new T.FogExp2('#070512', 0.012);
+
+    // lights
+    s.add(new T.AmbientLight(0xffffff, 0.55));
+    const key = new T.DirectionalLight(0xffffff, 1.1); key.position.set(6,8,10); s.add(key);
+    const sunLight = new T.PointLight(0xffe6b0, 2.2, 0, 1.6); sunLight.position.set(-10,6,-78); s.add(sunLight);
+
+    // starfield
+    const N = 1400; const pos = new Float32Array(N*3);
+    for(let i=0;i<N;i++){
+      pos[i*3]   = (Math.random()-0.5)*180;
+      pos[i*3+1] = (Math.random()-0.5)*120;
+      pos[i*3+2] = -Math.random()*180 + 10;
+    }
+    const sg = new T.BufferGeometry(); sg.setAttribute('position', new T.BufferAttribute(pos,3));
+    const stars = new T.Points(sg, new T.PointsMaterial({ color:0xffffff, size:0.32, sizeAttenuation:true, transparent:true, opacity:0.9 }));
+    s.add(stars);
+    // colored distant stars
+    const N2=400; const p2=new Float32Array(N2*3); const col=new Float32Array(N2*3);
+    const tint=[[0.55,0.6,1],[1,0.6,0.85],[0.7,1,0.5]];
+    for(let i=0;i<N2;i++){ p2[i*3]=(Math.random()-0.5)*180; p2[i*3+1]=(Math.random()-0.5)*120; p2[i*3+2]=-Math.random()*180; const c=tint[i%3]; col[i*3]=c[0];col[i*3+1]=c[1];col[i*3+2]=c[2]; }
+    const sg2=new T.BufferGeometry(); sg2.setAttribute('position',new T.BufferAttribute(p2,3)); sg2.setAttribute('color',new T.BufferAttribute(col,3));
+    s.add(new T.Points(sg2, new T.PointsMaterial({ size:0.5, vertexColors:true, transparent:true, opacity:0.8 })));
+
+    // sun at far end
+    const sun = new T.Mesh(new T.IcosahedronGeometry(7,2), new T.MeshBasicMaterial({ color:0xffd27a }));
+    sun.position.set(-10,6,-82); s.add(sun);
+    const halo = new T.Mesh(new T.SphereGeometry(11,24,24), new T.MeshBasicMaterial({ color:0xffb347, transparent:true, opacity:0.12 }));
+    halo.position.copy(sun.position); s.add(halo);
+
+    // planets at each checkpoint
+    const TRACK = 88;
+    this.cosmosTrack = TRACK;
+    const defs = [
+      { r:2.6, ring:true, moon:false },
+      { r:2.1, ring:false, moon:true },
+      { r:2.9, ring:false, moon:false },
+      { r:2.0, ring:true, moon:false },
+      { r:2.4, ring:false, moon:true },
+      { r:2.7, ring:false, moon:false },
+    ];
+    for(let i=0;i<6;i++){
+      const side = (i%2===0) ? -1 : 1;
+      const z = (8 - this.CENTERS[i]*TRACK) - 7;
+      const group = new T.Group();
+      group.position.set(side*3.4, (i%2?0.8:-0.8), z);
+      const col = new T.Color(this.PALETTE[i]);
+      const planet = new T.Mesh(
+        new T.IcosahedronGeometry(defs[i].r, 4),
+        new T.MeshStandardMaterial({ color:col, flatShading:true, roughness:0.65, metalness:0.1, emissive:col })
+      );
+      planet.material.emissiveIntensity = 0.14;
+      group.add(planet);
+      // atmosphere glow
+      const atm = new T.Mesh(new T.SphereGeometry(defs[i].r*1.25, 24,24), new T.MeshBasicMaterial({ color:col, transparent:true, opacity:0.10 }));
+      group.add(atm);
+      if(defs[i].ring){
+        const ring = new T.Mesh(new T.TorusGeometry(defs[i].r*1.7, 0.16, 10, 48), new T.MeshStandardMaterial({ color:0xffffff, emissive:col.clone().multiplyScalar(0.4), roughness:0.4, flatShading:true }));
+        ring.rotation.x = Math.PI*0.42; ring.rotation.y = 0.3; group.add(ring);
+      }
+      if(defs[i].moon){
+        const moon = new T.Mesh(new T.IcosahedronGeometry(0.5,1), new T.MeshStandardMaterial({ color:0xdfe6ff, flatShading:true, roughness:0.8 }));
+        moon.userData.orbit = { r: defs[i].r*1.9, sp: 0.6+i*0.1, ph: i }; group.add(moon);
+        group.userData.moon = moon;
+      }
+      s.add(group);
+      this.animated.push({ m:planet, rx:0.0015, ry:0.004+i*0.0006, rz:0 });
+      this.addPick(planet, i);
+      this.projects.push({ i, mesh:planet, scaleObj:group, anchor:group.position.clone(), hitR:defs[i].r*1.25, baseEmi:0.14, bigScale:0.13, side:(i%2===0?'left':'right'), moon:group.userData.moon || null });
+    }
+
+    this.camera.position.set(0,0,8);
+    this.camera.lookAt(0,0,0);
+  }
+
+  // ---------- OFFICE ----------
+  box(w,h,d,color,x,y,z,opts){
+    const T = window.THREE; opts=opts||{};
+    const m = new T.Mesh(
+      new T.BoxGeometry(w,h,d),
+      opts.emissive ? new T.MeshStandardMaterial({ color, emissive:new T.Color(color).multiplyScalar(opts.emi||0.6), roughness:0.5, flatShading:true })
+                    : new T.MeshStandardMaterial({ color, roughness:opts.rough!=null?opts.rough:0.85, metalness:opts.metal||0, flatShading:true })
+    );
+    m.position.set(x,y,z);
+    if(opts.rx)m.rotation.x=opts.rx; if(opts.ry)m.rotation.y=opts.ry; if(opts.rz)m.rotation.z=opts.rz;
+    m.castShadow = opts.cast!==false; m.receiveShadow = opts.receive!==false;
+    this.scene.add(m); return m;
+  }
+  cyl(rt,rb,h,color,x,y,z,opts){
+    const T=window.THREE; opts=opts||{};
+    const m=new T.Mesh(new T.CylinderGeometry(rt,rb,h,opts.seg||20), new T.MeshStandardMaterial({ color, roughness:opts.rough!=null?opts.rough:0.85, flatShading:true, emissive:opts.emissive?new T.Color(color).multiplyScalar(0.5):0x000000 }));
+    m.position.set(x,y,z); if(opts.rx)m.rotation.x=opts.rx; if(opts.rz)m.rotation.z=opts.rz;
+    m.castShadow=true; m.receiveShadow=true; this.scene.add(m); return m;
+  }
+
+  buildOffice(){
+    const T = window.THREE; const s = this.scene;
+    s.background = new T.Color('#241c44');
+    s.fog = new T.Fog('#241c44', 34, 78);
+
+    s.add(new T.AmbientLight(0xc8d0ff, 1.0));
+    s.add(new T.HemisphereLight(0xffe9c7, 0x3a2f5a, 0.7));
+    const key = new T.DirectionalLight(0xfff0d8, 1.9);
+    key.position.set(10,18,12); key.castShadow = true;
+    key.shadow.mapSize.set(1024,1024); key.shadow.camera.near=1; key.shadow.camera.far=60;
+    key.shadow.camera.left=-22; key.shadow.camera.right=22; key.shadow.camera.top=22; key.shadow.camera.bottom=-22;
+    s.add(key);
+    const fill = new T.DirectionalLight(0x6b5cff, 0.5); fill.position.set(-12,6,-4); s.add(fill);
+
+    // floor + walls (L-shaped room, corner at back-left)
+    this.box(40,0.5,40,'#3a2f4d',0,-0.25,0,{cast:false}); // floor
+    const rug = this.cyl(7,7,0.12,'#ff5fa8',1,0.07,2,{}); rug.scale.set(1,1,1.2);
+    this.box(40,16,0.5,'#2a2342',0,8,-12,{cast:false}); // back wall
+    this.box(0.5,16,40,'#241d3a',-12,8,0,{cast:false}); // left wall
+
+    // window on back wall with glowing sky
+    this.box(8.4,6.4,0.3,'#0e0b1f',2,8.5,-11.7,{cast:false});
+    this.box(7.6,5.6,0.2,'#7fd6ff',2,8.5,-11.55,{emissive:true,emi:0.7,cast:false});
+    // window cross frame
+    this.box(0.25,5.6,0.3,'#0e0b1f',2,8.5,-11.5,{cast:false});
+    this.box(7.6,0.25,0.3,'#0e0b1f',2,8.5,-11.5,{cast:false});
+
+    // posters on left wall — each is a project (1, 3, 6)
+    const posterMap=[0,2,5];
+    for(let j=0;j<3;j++){
+      const pi=posterMap[j]; const c=this.PALETTE[pi];
+      const py=10-j*4.2, pz=-6+j*4.2;
+      this.box(0.2,4.4,3.4,'#0e0b1f',-11.7,py,pz,{cast:false});
+      const pn = this.box(0.15,3.8,2.8,c,-11.55,py,pz,{emissive:true,emi:0.3,cast:false});
+      pn.material.emissiveIntensity=0.3;
+      this.addPick(pn,pi);
+      this.projects.push({ i:pi, mesh:pn, scaleObj:pn, anchor:new T.Vector3(-11.55,py,pz), hitR:2.0, baseEmi:0.3, bigScale:0.05, side:'right' });
+    }
+
+    // desk
+    this.box(9,0.4,4,'#caa46a',-3,4,-7,{}); // top
+    [[-7,-5.2],[ 1,-5.2],[-7,-8.8],[1,-8.8]].forEach(p=> this.box(0.5,4,0.5,'#8a6b3e',p[0],2,p[1],{}));
+    // monitor (screen) = project 2 (Spirit Airlines)
+    this.box(4.4,2.6,0.3,'#15101f',-3,5.9,-8.4,{});
+    const screen = this.box(4,2.2,0.18,this.PALETTE[1],-3,5.9,-8.25,{emissive:true,emi:0.6,cast:false});
+    screen.material.emissiveIntensity=0.6;
+    this.addPick(screen,1);
+    this.projects.push({ i:1, mesh:screen, scaleObj:screen, anchor:new T.Vector3(-3,5.9,-8.0), hitR:2.4, baseEmi:0.6, bigScale:0.04, side:'right' });
+    this.box(0.5,0.9,0.5,'#15101f',-3,4.55,-8.4,{}); // stand
+    this.box(1.8,0.2,1,'#15101f',-3,4.2,-8.2,{});
+    // keyboard
+    this.box(2.6,0.2,1,'#211a36',-3,4.3,-6.4,{});
+    // film clapperboard on desk = project 5 (Success.)
+    const clap = this.box(2,0.3,1.4,'#15101f',-7.2,4.35,-6.6,{});
+    this.box(2,0.4,0.25,'#f2f2f2',-7.2,4.7,-6.0,{rz:0.18});
+    const stripe = this.box(2.06,0.2,0.3,this.PALETTE[4],-7.2,5.02,-6.0,{emissive:true,emi:0.5,rz:0.18,cast:false});
+    stripe.material.emissiveIntensity=0.5;
+    this.addPick(stripe,4); this.addPick(clap,4);
+    this.projects.push({ i:4, mesh:stripe, scaleObj:clap, anchor:new T.Vector3(-7.2,4.95,-6.0), hitR:1.6, baseEmi:0.5, bigScale:0.07, side:'right' });
+    // coffee mug
+    this.cyl(0.4,0.4,0.8,this.PALETTE[1],0.6,4.6,-6.2,{});
+
+    // chair = project 4 (Advice from Strangers)
+    const seat = this.box(2.4,0.4,2.4,this.PALETTE[3],-3,2.6,-3.6,{});
+    const back = this.box(2.4,2.8,0.4,this.PALETTE[3],-3,4,-2.5,{rx:-0.12});
+    back.material.emissive=new T.Color(this.PALETTE[3]); back.material.emissiveIntensity=0.25;
+    seat.material.emissive=new T.Color(this.PALETTE[3]); seat.material.emissiveIntensity=0.25;
+    this.cyl(0.25,0.25,2.4,'#2a2342',-3,1.4,-3.6,{});
+    this.cyl(1.1,1.1,0.25,'#2a2342',-3,0.2,-3.6,{});
+    this.addPick(back,3); this.addPick(seat,3);
+    this.projects.push({ i:3, mesh:back, scaleObj:back, anchor:new T.Vector3(-3,4.3,-2.5), hitR:1.8, baseEmi:0.25, bigScale:0.05, side:'right' });
+
+    // shelf with colorful books on left
+    this.box(0.6,0.4,5,'#caa46a',-10.5,7,2,{});
+    this.box(0.6,0.4,5,'#caa46a',-10.5,3.4,2,{});
+    const bookCols = this.PALETTE;
+    for(let i=0;i<7;i++){ this.box(0.5,1.3+ (i%3)*0.25,0.5,bookCols[i%6],-10.5,7.9+(((i%3)*0.25)/2),0+(i-3)*0.62,{ }); }
+    for(let i=0;i<6;i++){ this.box(0.5,1.4,0.5,bookCols[(i+2)%6],-10.5,4.3,0.3+(i-3)*0.62,{}); }
+
+    // plant
+    this.cyl(0.9,0.7,1.4,'#d98a4a',6,0.7,-2,{});
+    const foliage = new T.Group();
+    [[0,1.8,0,1.4],[0.6,2.2,0.3,1.0],[-0.5,2.4,-0.2,0.9],[0.2,2.9,0.1,0.8]].forEach(f=>{
+      const leaf = this.box(0,0,0,'#3ddc84',0,0,0,{}); this.scene.remove(leaf);
+    });
+    const T2=window.THREE;
+    [[0,2.0,0,1.5],[0.7,2.4,0.2,1.05],[-0.6,2.6,-0.3,0.95],[0.2,3.1,0.2,0.8]].forEach(f=>{
+      const leaf = new T2.Mesh(new T2.IcosahedronGeometry(f[3],1), new T2.MeshStandardMaterial({ color:0x4be88a, flatShading:true, roughness:0.8 }));
+      leaf.position.set(6+f[0], f[1], -2+f[2]); leaf.castShadow=true; this.scene.add(leaf);
+    });
+
+    // hanging pendant lamp
+    this.cyl(0.05,0.05,4,'#15101f',5,13.8,-6,{cast:false});
+    const bulb = this.cyl(1.1,0.4,1.2,'#ffd27a',5,11.4,-6,{emissive:true});
+    const lamp = new T.PointLight(0xffe6b0, 0.9, 30, 2); lamp.position.set(5,10.6,-6); s.add(lamp);
+
+    // small ambient floating orbs (decor only)
+    [[8,5,-1,'#ffd27a'],[9.5,8,-4,'#ff5fa8']].forEach(o=>{
+      const orb=new T.Mesh(new T.IcosahedronGeometry(0.5,1), new T.MeshStandardMaterial({ color:o[3], emissive:new T.Color(o[3]).multiplyScalar(0.4), flatShading:true, roughness:0.6 }));
+      orb.position.set(o[0],o[1],o[2]); orb.castShadow=true; s.add(orb);
+      this.animated.push({ m:orb, rx:0.003, ry:0.005, rz:0, float:o[1], fa:o[1], fph:o[0] });
+    });
+
+    // guided camera tour — each stop frames one project object
+    this.officeKeys = [
+      { k:0.0,  p:[13,11,17],   t:[-3,5,-4] },
+      { k:0.13, p:[-2,10,-6],   t:[-11.55,10,-6] },
+      { k:0.27, p:[-3,6.3,-3.4],t:[-3,5.9,-8.25] },
+      { k:0.41, p:[-2,6,-1.8],  t:[-11.55,5.8,-1.8] },
+      { k:0.55, p:[-3,4.7,2.9], t:[-3,3.9,-2.5] },
+      { k:0.68, p:[-4.6,6.4,-2.4],t:[-7.2,4.8,-6.0] },
+      { k:0.81, p:[-2,2.6,2.4], t:[-11.55,1.6,2.4] },
+      { k:1.0,  p:[9,9,18],     t:[0,4.5,-3] },
+    ];
+    this.camera.position.set(13,11,17);
+    this.camera.lookAt(-3,5,-4);
+  }
+
+  // ---------- loop ----------
+  start(){
+    const T = window.THREE;
+    const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+    const bell=(t,c,w)=>clamp(1-Math.abs(t-c)/w,0,1);
+    const loop = () => {
+      this.raf = requestAnimationFrame(loop);
+      const p = this.scroll;
+      const time = performance.now()*0.001;
+      // smooth mouse
+      this.smx = (this.smx||0) + ((this.mouse.x)-(this.smx||0))*0.06;
+      this.smy = (this.smy||0) + ((this.mouse.y)-(this.smy||0))*0.06;
+
+      // camera per mode
+      if(this.state.mode==='cosmos'){
+        const camZ = 8 - p*this.cosmosTrack;
+        let tx=0,ty=0,w=0;
+        this.projects.forEach(pr=>{ const d=Math.abs(camZ-(pr.anchor.z+7)); const wi=Math.max(0,1-d/11); tx+=pr.anchor.x*wi; ty+=pr.anchor.y*wi; w+=wi; });
+        if(w>0){ tx/=w; ty/=w; }
+        this.camera.position.set(tx*0.55 + this.smx*1.0, ty*0.45 - this.smy*0.8, camZ);
+        this.camera.lookAt(tx*0.9, ty*0.7, camZ-7);
+        this.projects.forEach(pr=>{ if(pr.moon){ const o=pr.moon.userData.orbit; pr.moon.position.set(Math.cos(time*o.sp+o.ph)*o.r, Math.sin(time*o.sp+o.ph)*0.6, Math.sin(time*o.sp+o.ph)*o.r); } });
+      } else {
+        const K=this.officeKeys; let a=0;
+        for(let j=0;j<K.length-1;j++){ if(p>=K[j].k && p<K[j+1].k){ a=j; break; } if(p>=K[K.length-1].k) a=K.length-2; }
+        const k0=K[a], k1=K[a+1]; let tt=(p-k0.k)/((k1.k-k0.k)||1); tt=Math.max(0,Math.min(1,tt)); tt=tt*tt*(3-2*tt);
+        const lp=(u,v)=>u+(v-u)*tt;
+        this.camera.position.set(lp(k0.p[0],k1.p[0])+this.smx*0.7, lp(k0.p[1],k1.p[1])-this.smy*0.5, lp(k0.p[2],k1.p[2]));
+        this.camera.lookAt(lp(k0.t[0],k1.t[0]), lp(k0.t[1],k1.t[1]), lp(k0.t[2],k1.t[2]));
+      }
+
+      // which project is currently framed (label visible) — the only clickable one
+      let active=-1, best=0.28;
+      this.projects.forEach(pr=>{ const b=bell(p,this.CENTERS[pr.i],this.BELL); if(b>best){ best=b; active=pr.i; } });
+      this.active = active;
+
+      // hover via screen-circle pick (matches click exactly, zoom-independent)
+      if(this.projects && this.projects.length){
+        if(!this.lockHover){
+          this.hover = (this._px!=null) ? this.pickAt(this._px, this._py) : -1;
+        }
+        const cv=this.canvasRef.current; if(cv) cv.style.cursor = this.hover>=0 ? 'pointer' : '';
+      }
+      this.projects.forEach(pr=>{
+        const want = Math.max(this.hover===pr.i?1:0, bell(p,this.CENTERS[pr.i],this.BELL)>0.4?0.5:0);
+        pr.glow = (pr.glow||0) + (want-(pr.glow||0))*0.12;
+        if(pr.mesh&&pr.mesh.material) pr.mesh.material.emissiveIntensity = pr.baseEmi + pr.glow*0.7;
+        if(pr.scaleObj) pr.scaleObj.scale.setScalar(1 + pr.glow*(pr.bigScale||0.06));
+      });
+
+      // animated spins / floats
+      this.animated.forEach(a=>{
+        if(a.rx)a.m.rotation.x+=a.rx; if(a.ry)a.m.rotation.y+=a.ry; if(a.rz)a.m.rotation.z+=a.rz;
+        if(a.float!=null){ a.m.position.y = a.fa + Math.sin(time*0.8 + a.fph)*0.3; }
+        if(a.sway){ a.m.rotation.y = Math.sin(time*0.5)*0.25; }
+      });
+
+      this.updateOverlay(p, clamp, bell);
+      this.renderer.render(this.scene, this.camera);
+    };
+    loop();
+  }
+
+  updateOverlay(p, clamp, bell){
+    const ov = this.overlayRef.current; if(!ov) return;
+    const hero = ov.querySelector('.o-hero');
+    const scrim = ov.querySelector('.o-scrim');
+    const zt = clamp(p/this.ZOOM_END, 0, 1);            // 0 → 1 across the intro
+    const zEase = zt*zt;                                // accelerate the dive
+    const heroScale = 1 + zEase*2.2;                    // zoom the about text toward camera
+    const heroOp = clamp(1 - zt*1.35, 0, 1);
+    if(hero){
+      hero.style.opacity = heroOp;
+      hero.style.pointerEvents = heroOp>0.15 ? 'auto' : 'none';
+      hero.style.transform = `translate(-50%,-50%) scale(${heroScale})`;
+      hero.style.filter = zt>0.2 ? `blur(${(zt-0.2)*6}px)` : 'none';
+    }
+    if(scrim){ scrim.style.opacity = clamp(1 - zt*1.2, 0, 1); }
+
+    const cam=this.camera, cv=this.canvasRef.current;
+    if(cam && cv && this.projects && this.projects.length){
+      const W=cv.clientWidth, H=cv.clientHeight;
+      const v=this._v||(this._v=new (window.THREE.Vector3)());
+      this.projects.forEach(pr=>{
+        const i=pr.i;
+        const card=this.cards&&this.cards[i], dot=this.dots&&this.dots[i];
+        v.copy(pr.anchor).project(cam);
+        const behind = v.z>1;
+        const sx=(v.x*0.5+0.5)*W, sy=(-v.y*0.5+0.5)*H;
+        // store on-screen circle for click picking (zoom-independent)
+        const wr = pr.hitR || 2.2;
+        const e=this._e||(this._e=new (window.THREE.Vector3)());
+        const right=this._r||(this._r=new (window.THREE.Vector3)());
+        right.setFromMatrixColumn(cam.matrixWorld,0).multiplyScalar(wr);
+        e.copy(pr.anchor).add(right).project(cam);
+        const ex=(e.x*0.5+0.5)*W;
+        pr._sx=sx; pr._sy=sy; pr._sr=Math.max(26, Math.abs(ex-sx)); pr._front=!behind;
+        const op = behind?0:bell(p,this.CENTERS[i],this.BELL);
+        if(card){
+          const off = pr.side==='left'?-1:1;
+          const cx=clamp(sx+off*175, 205, W-205), cy=clamp(sy, 150, H-165);
+          card.style.opacity=op;
+          card.style.pointerEvents = op>0.2?'auto':'none';
+          card.style.left='0px'; card.style.top='0px';
+          card.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%) scale(${0.92+op*0.08})`;
+        }
+        if(dot){
+          const dx=clamp(sx,6,W-6), dy=clamp(sy,6,H-6);
+          dot.style.opacity = op>0.05 ? Math.min(1,op*0.6+0.35) : 0;
+          dot.style.transform=`translate(${dx}px,${dy}px) translate(-50%,-50%)`;
+        }
+      });
+    }
+
+    const contact = ov.querySelector('.o-contact');
+    const cop = bell(p, this.CONTACT, 0.06);
+    if(contact){ contact.style.opacity = cop; contact.style.pointerEvents = cop>0.1?'auto':'none'; contact.style.transform = `translate(-50%, calc(-50% + ${(1-cop)*34}px))`; }
+
+    const fill = ov.querySelector('.o-fill');
+    if(fill) fill.style.height = (p*100)+'%';
+  }
+}
+</script>
+</body>
+</html>

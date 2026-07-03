@@ -1,0 +1,8 @@
+node_modules
+dist
+.DS_Store
+*.local
+
+# full-size source media (videos etc.) — web-compressed copies live in
+# public/projects/; originals kept here so the repo stays under GitHub limits
+media-originals

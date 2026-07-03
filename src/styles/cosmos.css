@@ -1,0 +1,315 @@
+.cosmos-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  font-family: var(--font-body);
+}
+
+.cosmos-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* ── top chrome ── */
+.cosmos-wordmark {
+  position: absolute;
+  top: 24px; left: 32px;
+  pointer-events: all;
+  font-size: 10px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: rgba(255,255,255,.55);
+  text-decoration: none;
+  transition: color .25s;
+}
+.cosmos-wordmark:hover { color: #fff; }
+.cosmos-about-link {
+  position: absolute;
+  top: 22px; right: 32px;
+  pointer-events: all;
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.55);
+  text-decoration: none; padding: 6px 2px;
+  transition: color .25s;
+}
+.cosmos-about-link:hover { color: #fff; }
+.cosmos-back-link {
+  position: absolute;
+  top: 54px; left: 32px;
+  pointer-events: all;
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.55);
+  text-decoration: none; padding: 6px 2px;
+  transition: color .25s;
+}
+.cosmos-back-link:hover { color: #fff; }
+
+/* ── scroll rail ── */
+.cosmos-scroll-rail-wrap {
+  position: absolute;
+  top: 50%; right: 26px;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.cosmos-scroll-label {
+  writing-mode: vertical-rl;
+  font-size: 8px; letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+}
+.cosmos-scroll-rail {
+  width: 2px; height: 110px;
+  background: rgba(255,255,255,.1);
+  position: relative; border-radius: 2px; overflow: hidden;
+}
+.cosmos-scroll-fill {
+  position: absolute; top: 0; left: 0; right: 0; height: 0%;
+  background: linear-gradient(#fff, rgba(255,255,255,.4));
+}
+
+/* ── scrim ── */
+.cosmos-scrim {
+  position: absolute; inset: 0;
+  background: radial-gradient(120% 90% at 50% 46%, rgba(8,6,20,.62) 0%, rgba(8,6,20,.34) 45%, rgba(8,6,20,0) 78%);
+  pointer-events: none;
+}
+
+/* ── hero (about intro) ── */
+.cosmos-hero {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: 50% 50%;
+  width: min(94vw, 1080px);
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(28px, 4vw, 64px);
+  color: #fff;
+}
+.cosmos-hero-portrait {
+  flex: 0 0 auto;
+  display: block;
+  position: relative;
+  width: clamp(180px, 20vw, 290px);
+  aspect-ratio: 41/58;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 30px 90px -30px rgba(91,140,255,.6), 0 22px 70px -34px rgba(255,95,168,.55);
+  transition: transform .4s ease;
+}
+.cosmos-hero-portrait:hover { transform: translateY(-5px); }
+.cosmos-hero-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
+
+.cosmos-hero-text { text-align: left; max-width: 520px; }
+.cosmos-eyebrow {
+  font-size: 11px; letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(255,255,255,.42); margin-bottom: 20px;
+}
+.cosmos-name-link { text-decoration: none; display: inline-block; }
+.cosmos-name {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 8.2vw, 120px);
+  line-height: .84;
+  letter-spacing: .03em;
+  background: var(--gradient-signature);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cosmos-name-underline {
+  display: block; height: 2px; width: 0%; margin-top: 10px;
+  background: linear-gradient(90deg, #5b8cff, #ff5fa8);
+  transition: width .4s ease;
+}
+.cosmos-name-link:hover .cosmos-name-underline { width: 100%; }
+.cosmos-roles {
+  font-size: 13px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.5); margin-top: 18px;
+}
+.cosmos-lead {
+  font-size: clamp(1rem, 1.5vw, 1.28rem);
+  font-weight: 300; line-height: 1.6; color: #fff; margin-top: 26px;
+  text-wrap: pretty;
+}
+.cosmos-readmore {
+  display: inline-block; margin-top: 22px;
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,255,255,.55); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,.25); padding-bottom: 3px;
+  transition: color .25s;
+}
+.cosmos-readmore:hover { color: #fff; }
+.cosmos-hint {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,255,255,.32); margin-top: 34px;
+  animation: pulseHint 2.8s ease-in-out infinite;
+}
+
+/* ── scroll cue (Landing hero only) ── */
+.cosmos-scrollcue {
+  position: absolute;
+  left: 50%; bottom: 40px;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  text-align: center;
+}
+.cosmos-scrollcue-label {
+  font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  background: var(--gradient-signature);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 14px rgba(91,140,255,.45));
+}
+.cosmos-scrollcue-chevrons { display: flex; flex-direction: column; align-items: center; }
+.cosmos-scrollcue-chevrons i {
+  display: block; width: 14px; height: 14px;
+  border-right: 2px solid #fff; border-bottom: 2px solid #fff;
+  border-radius: 1px;
+  transform: rotate(45deg);
+  opacity: .3;
+  animation: chevronBounce 1.6s ease-in-out infinite;
+}
+.cosmos-scrollcue-chevrons i:nth-child(2) { margin-top: -7px; animation-delay: .16s; }
+.cosmos-scrollcue-chevrons i:nth-child(3) { margin-top: -7px; animation-delay: .32s; }
+@keyframes chevronBounce {
+  0%, 100% { opacity: .25; transform: rotate(45deg) translate(0, 0); }
+  50% { opacity: 1; transform: rotate(45deg) translate(3px, 3px); }
+}
+
+/* ── gallery title (GalaxyPage intro) ── */
+.cosmos-gallery-title {
+  position: absolute;
+  top: 42%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  width: min(90vw, 640px);
+  pointer-events: none;
+}
+.cosmos-gallery-eyebrow {
+  font-size: 11px; letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(255,255,255,.42); margin-bottom: 18px;
+}
+.cosmos-gallery-heading {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7vw, 88px);
+  line-height: .92; letter-spacing: .02em;
+  background: var(--gradient-signature);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 18px;
+}
+.cosmos-gallery-tagline {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  font-weight: 300; color: rgba(255,255,255,.75);
+  line-height: 1.6; margin-bottom: 28px;
+}
+
+/* ── project cards ── */
+.cosmos-card {
+  --accent: #5b8cff;
+  position: absolute; top: 0; left: 0;
+  width: min(40vw, 430px);
+  opacity: 0;
+  will-change: opacity, transform;
+}
+.cosmos-card-link {
+  display: block; position: relative; color: #fff; text-decoration: none;
+  background: rgba(8,6,20,.78);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px; overflow: hidden;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 10px 50px rgba(0,0,0,.55), 0 0 70px -16px var(--accent), 0 0 120px -30px var(--accent);
+  transition: transform .4s ease, box-shadow .4s ease;
+}
+.cosmos-card-link:hover { transform: translateY(-5px); }
+.cosmos-card-index {
+  position: absolute; top: 16px; right: 18px;
+  font-family: var(--font-display); font-size: 14px; letter-spacing: .1em;
+  color: var(--accent); opacity: .85; z-index: 2;
+}
+.cosmos-card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+.cosmos-card-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform .6s ease; }
+.cosmos-card-link:hover .cosmos-card-img img { transform: scale(1.06); }
+.cosmos-card-body { padding: 20px 22px 24px; }
+.cosmos-card-title {
+  font-family: var(--font-display); font-size: 30px; letter-spacing: .04em;
+  color: var(--accent); line-height: 1.04; margin-bottom: 11px;
+}
+.cosmos-card-tagline {
+  font-size: 13px; font-weight: 300; line-height: 1.5;
+  color: rgba(255,255,255,.7); margin-bottom: 14px;
+}
+.cosmos-card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.cosmos-card-tag {
+  font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 4px 11px; border: 1px solid rgba(255,255,255,.16);
+  border-radius: 99px; color: rgba(255,255,255,.5);
+}
+.cosmos-card-view {
+  font-size: 10px; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--accent); opacity: .65; transition: opacity .2s;
+}
+.cosmos-card-link:hover .cosmos-card-view { opacity: 1; }
+
+/* ── hotspot dots ── */
+.cosmos-dot {
+  position: absolute; left: 0; top: 0;
+  width: 13px; height: 13px; border-radius: 50%;
+  background: currentColor;
+  transform: translate(-9999px, -9999px);
+  pointer-events: none;
+  box-shadow: 0 0 14px currentColor;
+  opacity: 0;
+  transition: opacity .25s;
+}
+.cosmos-dot::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  animation: ring 1.9s ease-out infinite;
+}
+
+/* ── contact ── */
+.cosmos-contact {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; opacity: 0; color: #fff;
+}
+.cosmos-contact-eyebrow {
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.4); margin-bottom: 18px;
+}
+.cosmos-contact-title {
+  font-family: var(--font-display);
+  font-size: clamp(54px, 8vw, 104px);
+  line-height: .92; letter-spacing: .03em; margin-bottom: 40px;
+  background: linear-gradient(110deg, #5b8cff, #ff5fa8 55%, #ffb347);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.cosmos-cta-btn {
+  display: inline-block; padding: 14px 36px;
+  border: 1px solid rgba(255,255,255,.3); border-radius: 999px;
+  color: #fff; text-decoration: none;
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  margin-bottom: 34px;
+  transition: background .25s, color .25s, border-color .25s;
+}
+.cosmos-cta-btn:hover { background: #fff; color: #08060f; border-color: #fff; }
+.cosmos-footer-links { display: flex; gap: 28px; justify-content: center; }
+.cosmos-footer-links a {
+  color: rgba(255,255,255,.4); text-decoration: none;
+  font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  transition: color .2s;
+}
+.cosmos-footer-links a:hover { color: #fff; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .cosmos-hero {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  .cosmos-hero-text { text-align: center; max-width: 100%; }
+  .cosmos-card { width: min(72vw, 340px); }
+  .cosmos-gallery-title { width: min(86vw, 420px); }
+}
