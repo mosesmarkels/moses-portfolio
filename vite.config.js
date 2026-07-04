@@ -1,12 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Set this to match your GitHub repo name, e.g. '/moses-portfolio/'.
-// Only matters for the production build served from GitHub Pages —
-// `npm run dev` ignores it.
-const GITHUB_REPO_NAME = 'moses-portfolio';
-
+// Site now serves from mosesmarkels.com (a custom domain), which sits at
+// the domain root — unlike the old mosesmarkels.github.io/moses-portfolio/
+// project-page URL, there's no repo-name subpath to account for.
 export default defineConfig({
   plugins: [react()],
-  base: process.env.NODE_ENV === 'production' ? `/${GITHUB_REPO_NAME}/` : '/',
+  base: '/',
 });
