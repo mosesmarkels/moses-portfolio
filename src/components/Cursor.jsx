@@ -1,10 +1,14 @@
 import { useEffect, useRef } from 'react';
 
 // Custom lerping cursor dot used on the project/about pages (mix-blend-mode: difference).
+// Touch devices have no cursor to replace — skip the whole rAF loop there.
+const isTouch = () => typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
+
 export default function Cursor() {
   const cursorRef = useRef(null);
 
   useEffect(() => {
+    if (isTouch()) return;
     const cursor = cursorRef.current;
     let mx = -100, my = -100, cx = -100, cy = -100;
     let raf;
@@ -51,5 +55,6 @@ export default function Cursor() {
     };
   }, []);
 
+  if (isTouch()) return null;
   return <div className="cursor" ref={cursorRef} />;
 }

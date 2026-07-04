@@ -11,14 +11,22 @@ import { useScrollProgress, useOverlayRefs } from '../components/cosmos/useScrol
 import { galaxies } from '../data/projects.js';
 import '../styles/cosmos.css';
 
-// Both galaxies sit side by side at a single fixed depth — no flythrough,
-// they're revealed together as soon as the About intro finishes.
-const GALAXY_X = 6.5;
+// Both galaxies are revealed together as soon as the About intro finishes —
+// side by side on wide screens. On tall/narrow (phone) screens the camera's
+// horizontal field of view is too narrow for that: anchors at x ±6.5 sit
+// entirely outside the frustum and the clusters are invisible. So portrait
+// viewports stack them vertically instead, and shrink them slightly so the
+// spiral disks fit the narrow width.
 const GALAXY_Z = -13;
-const anchors = [
-  new Vector3(-GALAXY_X, -0.6, GALAXY_Z),
-  new Vector3(GALAXY_X, 0.6, GALAXY_Z),
+const WIDE_ANCHORS = [
+  new Vector3(-6.5, -0.6, GALAXY_Z),
+  new Vector3(6.5, 0.6, GALAXY_Z),
 ];
+const PORTRAIT_ANCHORS = [
+  new Vector3(0, 3.1, GALAXY_Z),
+  new Vector3(0, -3.1, GALAXY_Z),
+];
+const isPortrait = () => window.innerHeight > window.innerWidth * 1.1;
 
 const SCROLL_LENGTH_VH = 260;
 
@@ -56,7 +64,12 @@ export default function Landing() {
 
   const overlayRefs = useOverlayRefs(galaxies.length, { hero: true });
   const bellsRef = useRef(new Array(galaxies.length).fill(0));
-  const hotspots = useMemo(() => anchors.map((anchor) => ({ anchor })), []);
+  // Orientation is sampled once at mount (rotating mid-visit re-samples on
+  // the next visit — not worth live-rebuilding the 3D scene over).
+  const portrait = useMemo(() => isPortrait(), []);
+  const anchors = portrait ? PORTRAIT_ANCHORS : WIDE_ANCHORS;
+  const clusterScale = portrait ? 0.72 : 1;
+  const hotspots = useMemo(() => anchors.map((anchor) => ({ anchor })), [anchors]);
 
   const handleSelectGalaxy = (key, index) => {
     if (transitionRef.current) return; // already zooming
@@ -97,6 +110,7 @@ export default function Landing() {
               index={i}
               galaxy={g}
               anchor={anchors[i]}
+              baseScale={clusterScale}
               bellsRef={bellsRef}
               hoverIndexRef={hoverIndexRef}
               onSelect={handleSelectGalaxy}

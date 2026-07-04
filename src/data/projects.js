@@ -90,8 +90,8 @@ export const projects = [
         type: 'phoneShots',
         heading: 'The Growth',
         shots: [
-          { src: asset('denver-sports-betting/account-before.png'), alt: 'Denver Sports Betting Instagram profile when I took over, at 9,537 followers', label: 'Day One', caption: '9,537 followers when I took over the account.' },
-          { src: asset('denver-sports-betting/account-after.png'), alt: 'Denver Sports Betting Instagram profile today, verified with 18K followers', label: 'Today', caption: '18K+ followers, verified — with pinned reels at 1.4M and 3.9M views.' },
+          { src: asset('denver-sports-betting/account-before.jpg'), alt: 'Denver Sports Betting Instagram profile when I took over, at 9,537 followers', label: 'Day One', caption: '9,537 followers when I took over the account.' },
+          { src: asset('denver-sports-betting/account-after.jpg'), alt: 'Denver Sports Betting Instagram profile today, verified with 18K followers', label: 'Today', caption: '18K+ followers, verified — with pinned reels at 1.4M and 3.9M views.' },
         ],
       },
       {
@@ -105,7 +105,7 @@ export const projects = [
         type: 'phoneShots',
         shots: [
           { src: asset('denver-sports-betting/top-posts.jpg'), alt: 'Grid of Denver Sports Betting meme reels with view counts from 60K to 184K', caption: 'Meme reels riding the news cycle — 63K, 72K, 167K, 184K views.' },
-          { src: asset('denver-sports-betting/pinned-posts.png'), alt: 'Denver Sports Betting profile grid with pinned reels at 1.4M and 3.9M views', caption: 'The profile today — pinned reels sitting at 1.4M and 3.9M views.' },
+          { src: asset('denver-sports-betting/pinned-posts.jpg'), alt: 'Denver Sports Betting profile grid with pinned reels at 1.4M and 3.9M views', caption: 'The profile today — pinned reels sitting at 1.4M and 3.9M views.' },
         ],
       },
       {
@@ -125,7 +125,7 @@ export const projects = [
       {
         type: 'phoneShots',
         shots: [
-          { src: asset('denver-sports-betting/sponsor-graphic.png'), alt: 'Sponsor graphic for We Live It Media and Flatirons Fire', caption: 'Sponsor integrations designed for the feed.' },
+          { src: asset('denver-sports-betting/sponsor-graphic.jpg'), alt: 'Sponsor graphic for We Live It Media and Flatirons Fire', caption: 'Sponsor integrations designed for the feed.' },
         ],
       },
       {
@@ -175,7 +175,7 @@ export const projects = [
       },
       {
         type: 'imageGrid',
-        rows: [{ cols: 1, images: [{ src: asset('spirit-airlines/challenge-overview.png'), alt: 'The Challenge overview', wide: true }] }],
+        rows: [{ cols: 1, images: [{ src: asset('spirit-airlines/challenge-overview.jpg'), alt: 'The Challenge overview', wide: true }] }],
       },
       {
         type: 'textBlock',
@@ -202,8 +202,8 @@ export const projects = [
         rows: [{
           cols: 2,
           images: [
-            { src: asset('spirit-airlines/audience-insights.png'), alt: 'Audience insights' },
-            { src: asset('spirit-airlines/audience-data.png'), alt: 'Audience data' },
+            { src: asset('spirit-airlines/audience-insights.jpg'), alt: 'Audience insights' },
+            { src: asset('spirit-airlines/audience-data.jpg'), alt: 'Audience data' },
           ],
         }],
       },
@@ -237,8 +237,8 @@ export const projects = [
         rows: [{
           cols: 2,
           images: [
-            { src: asset('spirit-airlines/persona-research.png'), alt: 'Persona research' },
-            { src: asset('spirit-airlines/persona-insights.png'), alt: 'Persona insights' },
+            { src: asset('spirit-airlines/persona-research.jpg'), alt: 'Persona research' },
+            { src: asset('spirit-airlines/persona-insights.jpg'), alt: 'Persona insights' },
           ],
         }],
       },
@@ -297,15 +297,15 @@ export const projects = [
           {
             cols: 2,
             images: [
-              { src: asset('spirit-airlines/campaign-work-1.png'), alt: 'Campaign work 1' },
-              { src: asset('spirit-airlines/campaign-work-2.png'), alt: 'Campaign work 2' },
-              { src: asset('spirit-airlines/campaign-work-3.png'), alt: 'Campaign work 3' },
-              { src: asset('spirit-airlines/campaign-work-4.png'), alt: 'Campaign work 4' },
+              { src: asset('spirit-airlines/campaign-work-1.jpg'), alt: 'Campaign work 1' },
+              { src: asset('spirit-airlines/campaign-work-2.jpg'), alt: 'Campaign work 2' },
+              { src: asset('spirit-airlines/campaign-work-3.jpg'), alt: 'Campaign work 3' },
+              { src: asset('spirit-airlines/campaign-work-4.jpg'), alt: 'Campaign work 4' },
             ],
           },
           {
             cols: 1,
-            images: [{ src: asset('spirit-airlines/campaign-final-spread.png'), alt: 'Campaign final spread', wide: true }],
+            images: [{ src: asset('spirit-airlines/campaign-final-spread.jpg'), alt: 'Campaign final spread', wide: true }],
           },
         ],
       },
@@ -403,8 +403,8 @@ export const projects = [
     tags: ['Advertising', 'Script Writing'],
     accent: '#5b8cff',
     planet: { radius: 2.6, ring: true, moon: false },
-    thumb: asset('unique-communications-ireland/thumb.png'),
-    hero: asset('unique-communications-ireland/hero.png'),
+    thumb: asset('unique-communications-ireland/thumb.jpg'),
+    hero: asset('unique-communications-ireland/hero.jpg'),
     intro: {
       paragraphs: [
         "During an 8-week summer internship with Unique Communications in Dublin, Ireland, I gained hands-on experience researching clients, writing scripts, capturing promotional photos for websites, and filming social media ads.",
@@ -501,16 +501,16 @@ export const projects = [
           {
             cols: 2,
             images: [
-              { src: asset('unique-communications-ireland/harte-peat-1.png'), alt: 'Harte Peat 1' },
-              { src: asset('unique-communications-ireland/harte-peat-2.png'), alt: 'Harte Peat 2' },
-              { src: asset('unique-communications-ireland/harte-peat-3.png'), alt: 'Harte Peat 3' },
-              { src: asset('unique-communications-ireland/harte-peat-4.png'), alt: 'Harte Peat 4' },
+              { src: asset('unique-communications-ireland/harte-peat-1.jpg'), alt: 'Harte Peat 1' },
+              { src: asset('unique-communications-ireland/harte-peat-2.jpg'), alt: 'Harte Peat 2' },
+              { src: asset('unique-communications-ireland/harte-peat-3.jpg'), alt: 'Harte Peat 3' },
+              { src: asset('unique-communications-ireland/harte-peat-4.jpg'), alt: 'Harte Peat 4' },
             ],
           },
           {
             cols: 1,
             images: [
-              { src: asset('unique-communications-ireland/harte-peat-5.png'), alt: 'Harte Peat 5', wide: true },
+              { src: asset('unique-communications-ireland/harte-peat-5.jpg'), alt: 'Harte Peat 5', wide: true },
             ],
           },
         ],
@@ -522,16 +522,16 @@ export const projects = [
           {
             cols: 2,
             images: [
-              { src: asset('unique-communications-ireland/social-ad-1.png'), alt: 'Social Ad 1' },
-              { src: asset('unique-communications-ireland/social-ad-2.png'), alt: 'Social Ad 2' },
-              { src: asset('unique-communications-ireland/social-ad-3.png'), alt: 'Social Ad 3' },
-              { src: asset('unique-communications-ireland/social-ad-4.png'), alt: 'Social Ad 4' },
+              { src: asset('unique-communications-ireland/social-ad-1.jpg'), alt: 'Social Ad 1' },
+              { src: asset('unique-communications-ireland/social-ad-2.jpg'), alt: 'Social Ad 2' },
+              { src: asset('unique-communications-ireland/social-ad-3.jpg'), alt: 'Social Ad 3' },
+              { src: asset('unique-communications-ireland/social-ad-4.jpg'), alt: 'Social Ad 4' },
             ],
           },
           {
             cols: 1,
             images: [
-              { src: asset('unique-communications-ireland/social-ad-5.png'), alt: 'Social Ad 5', wide: true },
+              { src: asset('unique-communications-ireland/social-ad-5.jpg'), alt: 'Social Ad 5', wide: true },
             ],
           },
         ],
@@ -601,8 +601,8 @@ export const projects = [
     tags: ['Personal Documentary'],
     accent: '#18e0ff',
     planet: { radius: 2.4, ring: false, moon: true },
-    thumb: asset('success/cover.png'),
-    hero: asset('success/cover.png'),
+    thumb: asset('success/cover.jpg'),
+    hero: asset('success/cover.jpg'),
     intro: {
       paragraphs: [
         'As I started thinking seriously about my future, one question kept coming up: What does it actually mean to be successful?',
@@ -626,8 +626,8 @@ export const projects = [
     tags: ['Short Film', 'Documentary'],
     accent: '#9b5cff',
     planet: { radius: 2.7, ring: false, moon: false },
-    thumb: asset('how-she-hurt-me/cover.png'),
-    hero: asset('how-she-hurt-me/cover.png'),
+    thumb: asset('how-she-hurt-me/cover.jpg'),
+    hero: asset('how-she-hurt-me/cover.jpg'),
     intro: {
       paragraphs: [
         "Created during my time in the Boulder Technical Education Center's video production program, How She Hurt Me is a deeply personal short documentary about teen addiction — told through the metaphor of a toxic relationship.",
@@ -652,8 +652,8 @@ export const projects = [
     tags: ['Short Film', 'Documentary'],
     accent: '#ff2bd1',
     planet: { radius: 2.0, ring: true, moon: false },
-    thumb: asset('advice-from-strangers/cover.png'),
-    hero: asset('advice-from-strangers/cover.png'),
+    thumb: asset('advice-from-strangers/cover.jpg'),
+    hero: asset('advice-from-strangers/cover.jpg'),
     intro: {
       paragraphs: [
         'Advice from Strangers is a light, heartwarming short film born from a simple idea: What if we just asked people for one piece of advice?',
@@ -677,8 +677,8 @@ export const projects = [
     tags: ['Documentary', 'Short Film'],
     accent: '#b6ff3b',
     planet: { radius: 2.9, ring: false, moon: false },
-    thumb: asset('betting-the-future/cover.png'),
-    hero: asset('betting-the-future/cover.png'),
+    thumb: asset('betting-the-future/cover.jpg'),
+    hero: asset('betting-the-future/cover.jpg'),
     intro: {
       paragraphs: [
         "This isn't a moral panic piece. It's an unfiltered look at how easy, addictive, and omnipresent sports betting has become — especially for a generation raised on apps, odds, and influencer endorsements.",

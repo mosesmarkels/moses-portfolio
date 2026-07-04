@@ -35,7 +35,7 @@ function useDiskGeometry(accent) {
 // native-pointer-event pattern as Planet.jsx (onPointerOver/Out/Click on a
 // dedicated hit-target sized to the whole visual cluster, not just the core,
 // so clicks stay accurate across the entire spiral).
-export default function GalaxyCluster({ index, galaxy, anchor, bellsRef, hoverIndexRef, onSelect }) {
+export default function GalaxyCluster({ index, galaxy, anchor, bellsRef, hoverIndexRef, onSelect, baseScale = 1 }) {
   const groupRef = useRef(null);
   const coreRef = useRef(null);
   const glow = useRef(0);
@@ -50,7 +50,7 @@ export default function GalaxyCluster({ index, galaxy, anchor, bellsRef, hoverIn
     const isFramed = bellsRef.current[index] > 0.4;
     const want = isHovered ? 1 : isFramed ? 0.5 : 0;
     glow.current += (want - glow.current) * 0.1;
-    group.scale.setScalar(1 + glow.current * BIG_SCALE);
+    group.scale.setScalar(baseScale * (1 + glow.current * BIG_SCALE));
     if (coreRef.current) coreRef.current.material.opacity = 0.22 + glow.current * 0.35;
   });
 

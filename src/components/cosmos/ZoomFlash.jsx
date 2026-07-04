@@ -8,19 +8,18 @@ import { useEffect, useRef } from 'react';
 export default function ZoomFlash({ accent, active, mode = 'in', durationMs = 1300 }) {
   const ref = useRef(null);
 
+  // Transitions are armed with a forced synchronous reflow (reading
+  // offsetHeight) rather than requestAnimationFrame: rAF is paused whenever
+  // the tab/page is hidden, which would leave the flash stuck fully opaque.
   useEffect(() => {
     if (mode !== 'out') return;
     const el = ref.current;
     if (!el) return;
     el.style.transition = 'none';
     el.style.opacity = '1';
-    const raf = requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        el.style.transition = `opacity ${Math.round(durationMs * 0.55)}ms ease-out`;
-        el.style.opacity = '0';
-      });
-    });
-    return () => cancelAnimationFrame(raf);
+    void el.offsetHeight; // flush, so the fade below starts from 1
+    el.style.transition = `opacity ${Math.round(durationMs * 0.55)}ms ease-out`;
+    el.style.opacity = '0';
   }, [mode, durationMs]);
 
   useEffect(() => {
@@ -28,11 +27,10 @@ export default function ZoomFlash({ accent, active, mode = 'in', durationMs = 13
     const el = ref.current;
     if (!el) return;
     if (active) {
-      const raf = requestAnimationFrame(() => {
-        el.style.transition = `opacity ${durationMs}ms ease-in`;
-        el.style.opacity = '1';
-      });
-      return () => cancelAnimationFrame(raf);
+      void el.offsetHeight;
+      el.style.transition = `opacity ${durationMs}ms ease-in`;
+      el.style.opacity = '1';
+      return;
     }
     el.style.transition = 'none';
     el.style.opacity = '0';

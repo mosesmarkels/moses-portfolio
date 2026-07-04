@@ -540,3 +540,30 @@ header.site-header {
   .about-split { grid-template-columns: 1fr; gap: 28px; }
   .work-cta { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 600px) {
+  .project-content { padding: 64px 18px 70px; }
+  .project-hero-content { padding: 0 18px 32px; }
+  .section-heading { margin-bottom: 26px; }
+  .project-intro { gap: 32px; margin-bottom: 64px; padding-bottom: 52px; }
+  .script-card { padding: 24px 20px; }
+  .persona-card { padding: 24px; gap: 20px; }
+  .phone-video.wide video { width: 100%; }
+  .phone-row { gap: 20px; margin-bottom: 60px; }
+  .next-project { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 52px; }
+}
+
+@media (max-width: 480px) {
+  header.site-header, .back-btn { padding-left: 16px; padding-right: 16px; }
+  .logo { font-size: .68rem; white-space: nowrap; }
+  .site-header nav ul { gap: 14px; }
+  .site-header nav a { font-size: .62rem; }
+  .back-btn { left: 16px; }
+}
+
+/* Touch devices: no mouse pointer to hide, and the custom cursor dot never
+   moves — restore the native (non-)cursor behavior. */
+@media (hover: none) {
+  .project-page, .about-page { cursor: auto; }
+  .cursor { display: none; }
+}
