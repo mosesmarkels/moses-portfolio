@@ -145,6 +145,169 @@ export const projects = [
   },
 
   {
+    slug: 'nfl-nsac',
+    galaxy: 'ads',
+    title: 'NFL — It Starts With One',
+    tags: ['Brand Strategy', 'Integrated Campaign'],
+    accent: '#d50a0a',
+    planet: { radius: 2.8, ring: true, moon: true },
+    thumb: asset('nfl-nsac/cover.jpg'),
+    hero: asset('nfl-nsac/cover.jpg'),
+    intro: {
+      paragraphs: [
+        "For the American Advertising Federation's National Student Advertising Competition — the country's premier student ad competition since 1973 — our CU Boulder team (Team 519) was given a real client and a real brief: the NFL. The task was to unify a decade of scattered youth health and wellness programs — NFL Flag, Play 60, My Cause My Cleats, Character Playbook — into one campaign that actually changes how people see the League.",
+        "Girls and women see football as exclusive and hyper-masculine. Casual fans have no idea these programs even exist. Over the course of the competition, our six-person team built the research, the strategy, the creative identity, and a full $10M media plan to fix that — an entire agency's worth of work, from strategy to execution.",
+      ],
+      details: [
+        { label: 'Client', value: 'NFL, via AAF National Student Advertising Competition' },
+        { label: 'Team', value: 'Team 519 — University of Colorado Boulder' },
+        { label: 'Scope', value: 'Research, brand strategy, creative identity, media plan' },
+      ],
+    },
+    sections: [
+      {
+        type: 'textBlock',
+        heading: 'The Challenge',
+        paragraphs: [
+          'For a decade, the NFL has launched purpose-led campaigns around its youth health and wellness initiatives — yet most people have no idea the League has a year-round presence in schools and communities nationwide. Fragmented messaging and inconsistent measurement have left the NFL without one holistic identity tying it all together.',
+          "The primary audience is casual NFL fans who enjoy football's communal side without being deeply invested. At the center of it: today's youth (ages 6–17) — girls who want to compete but feel culturally excluded, and boys who need to learn to welcome them. Parents are the gatekeepers who decide whether their kids ever get the invitation in the first place.",
+        ],
+      },
+      {
+        type: 'statGrid',
+        stats: [
+          { number: '306', text: 'Survey respondents, ages 16–60, behind every insight in this campaign.' },
+          { number: '16', text: 'Focus groups — parents, college students, and casual fans.' },
+          { number: '4', text: 'Audience personas built to keep the strategy grounded in real people, not just data.' },
+        ],
+      },
+      {
+        type: 'textBlock',
+        heading: 'What We Found',
+        paragraphs: [
+          "Play has moved from outside to online. Today's youth reach for a screen before a ball — screen time over an hour a day is linked to a higher risk of depression, while consistent physical activity cuts anxiety and depressive symptoms by up to 28%.",
+          "That's made worse by exclusivity: 70% of girls drop out of sports by age 14, twice the rate of boys, and kids from low-income households are 6x more likely to quit over cost alone. One focus group participant put it bluntly: “When I think about the NFL and what I associate with it, it's hyper-masculinity.”",
+          "But the fix doesn't have to be big. One mentor creates 5x the likelihood of upward progress. One small action triggers the same psychological pull as an unfinished to-do list — the brain wants to see it through. No invitation is too small to change the trajectory.",
+        ],
+      },
+      {
+        type: 'persona',
+        heading: 'Meet the Audience',
+        initials: 'BB',
+        name: 'Burnt Out Brooklyn',
+        subtitle: '16 · Austin, TX · Primary Audience',
+        paragraphs: [
+          "Brooklyn has played field hockey her whole life. This semester, she quit her varsity team — her coach stripped the fun out of the sport she loved, and she was shamed for having a muscular build. She's taken up yoga and jewelry-making since, and likes that they feel more “girly,” but deep down she misses the competitiveness and community of a team.",
+          'She lives on TikTok, YouTube, and Instagram — where frequent use is already linked to worse mental health outcomes for teen girls than for boys.',
+        ],
+      },
+      {
+        type: 'persona',
+        heading: '',
+        initials: 'PP',
+        name: 'Papa Phil',
+        subtitle: '43 · Tampa, FL · Secondary Audience',
+        paragraphs: [
+          'Phil is a nurse practitioner, a former college cornerback, and a Buccaneers fan who watches every game with his 14-year-old son — teaching him to play, inspiring him to follow in his footsteps. He has a 7-year-old daughter, too. As he teaches his son football, he never once considers teaching her.',
+          "That's the gatekeeper problem in one house: the invitation only goes one way, without anyone deciding to keep it that way.",
+        ],
+      },
+      {
+        type: 'textBlock',
+        heading: 'The Solution: It Starts With One',
+        paragraphs: [
+          "Audiences ignore messages that speak to a broad crowd instead of to them individually. They need a spark of encouragement — proof that their own actions matter more than they think. So the strategy became a single unifying idea: a campaign that puts every NFL youth program under one identity, and turns every parent, coach, and casual fan into the “01” who starts something for someone else.",
+          '“It Starts With One” deliberately echoes the NFL\'s own recent “It Takes All of Us” language — familiar, but reframed around the power of a single person inside a larger group.',
+        ],
+      },
+      {
+        type: 'callout',
+        content: [
+          { tag: 'text', text: 'Behind every great movement, there is a beginning. A backstory. Starting with one idea. One action. One moment. It doesn\'t matter how many times you get knocked down, because you only need one win to keep going. One person to inspire you. One invitation to belong. Together we win. ' },
+          { tag: 'strong', text: 'It starts with one.' },
+        ],
+      },
+      {
+        type: 'imageGrid',
+        heading: 'Bringing the Identity to Life',
+        rows: [
+          { cols: 1, images: [{ src: asset('nfl-nsac/billboard.jpg'), alt: 'Campaign billboard: "01 Parent to see her Potential" over a girls\' soccer huddle', wide: true }] },
+        ],
+      },
+      {
+        type: 'localVideo',
+        wide: true,
+        heading: 'The Anthem Spot',
+        src: asset('nfl-nsac/anthem-spot.mp4'),
+        poster: asset('nfl-nsac/anthem-spot-poster.jpg'),
+        caption: 'The campaign\'s :30 TV anthem spot, written and produced for the plans book presentation.',
+      },
+      {
+        type: 'textBlock',
+        heading: 'Media Strategy',
+        paragraphs: [
+          'A yearlong rollout across three phases keeps the message tied to the NFL calendar: Launch (Aug–Dec) drives awareness of the programs that exist; Peak (Jan–Feb) leans on the Super Bowl moment to lift brand perception; Post-Season (Mar–Jul) shifts from storytelling to activation, pushing families toward real sign-ups.',
+          'The plan spans streaming and TV, social, out-of-home, cinema, gaming and retail partnerships (Madden, Dick\'s Sporting Goods), PR activations, and owned stadium placements — across both domestic and international markets.',
+        ],
+      },
+      {
+        type: 'statGrid',
+        stats: [
+          { number: '$10M', text: 'Total media budget across the full 11-month, 3-phase rollout.' },
+          { number: '4.6B', text: 'Projected impressions across every paid channel.' },
+          { number: '4.86M', text: 'Projected clicks driving families to the campaign\'s program hub.' },
+        ],
+      },
+      {
+        type: 'imageGrid',
+        heading: 'Campaign Touchpoints',
+        rows: [
+          {
+            cols: 2,
+            images: [
+              { src: asset('nfl-nsac/social-post.jpg'), alt: '"Share Your One" social stunt: a phone mockup inviting people to post the one person or moment that changed everything for them' },
+              { src: asset('nfl-nsac/hub-screenshot.jpg'), alt: 'The "01 NFL Hub" website and app mockup, the one place to explore and sign up for every NFL youth program' },
+            ],
+          },
+          {
+            cols: 2,
+            images: [
+              { src: asset('nfl-nsac/bus-wrap.jpg'), alt: 'Bus wrap: "01 Coach to inspire Change" featuring a youth football team' },
+              { src: asset('nfl-nsac/stadium-seat.jpg'), alt: 'The "01 Seat" PR activation: a reserved, branded seat at a live game honoring one person whose impact goes beyond the field' },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'textBlock',
+        heading: 'Social Content',
+        paragraphs: [
+          '"Share Your One" is a social stunt built to travel: it asks people to post the one person, moment, or experience that changed everything for them, turning a campaign line into something the audience actually says in their own words. Two of the social cuts built around that question:',
+        ],
+      },
+      {
+        type: 'localVideo',
+        src: asset('nfl-nsac/social-promo-1.mp4'),
+        poster: asset('nfl-nsac/social-promo-1-poster.jpg'),
+        caption: '"What\'s your ONE moment?" — a social cut built around the campaign\'s core question.',
+      },
+      {
+        type: 'localVideo',
+        src: asset('nfl-nsac/social-promo-2.mp4'),
+        poster: asset('nfl-nsac/social-promo-2-poster.jpg'),
+        caption: '"Who\'s the ONE that gets you out to play?" — a second cut of the same social concept.',
+      },
+      {
+        type: 'callout',
+        content: [
+          { tag: 'strong', text: '84% of people we tested felt connected to the campaign\'s local-care message, and 60% preferred "It Starts With One" concepts over the alternatives.' },
+          { tag: 'text', text: ' A full agency-style campaign — research, strategy, identity, film, and a $10M media plan — built from scratch by a six-person student team.' },
+        ],
+      },
+    ],
+  },
+
+  {
     slug: 'spirit-airlines',
     galaxy: 'ads',
     title: 'Spirit Airlines',
@@ -539,168 +702,6 @@ export const projects = [
     ],
   },
 
-  {
-    slug: 'nfl-nsac',
-    galaxy: 'ads',
-    title: 'NFL — It Starts With One',
-    tags: ['Brand Strategy', 'Integrated Campaign'],
-    accent: '#d50a0a',
-    planet: { radius: 2.8, ring: true, moon: true },
-    thumb: asset('nfl-nsac/cover.jpg'),
-    hero: asset('nfl-nsac/cover.jpg'),
-    intro: {
-      paragraphs: [
-        "For the American Advertising Federation's National Student Advertising Competition — the country's premier student ad competition since 1973 — our CU Boulder team (Team 519) was given a real client and a real brief: the NFL. The task was to unify a decade of scattered youth health and wellness programs — NFL Flag, Play 60, My Cause My Cleats, Character Playbook — into one campaign that actually changes how people see the League.",
-        "Girls and women see football as exclusive and hyper-masculine. Casual fans have no idea these programs even exist. Over the course of the competition, our six-person team built the research, the strategy, the creative identity, and a full $10M media plan to fix that — an entire agency's worth of work, from strategy to execution.",
-      ],
-      details: [
-        { label: 'Client', value: 'NFL, via AAF National Student Advertising Competition' },
-        { label: 'Team', value: 'Team 519 — University of Colorado Boulder' },
-        { label: 'Scope', value: 'Research, brand strategy, creative identity, media plan' },
-      ],
-    },
-    sections: [
-      {
-        type: 'textBlock',
-        heading: 'The Challenge',
-        paragraphs: [
-          'For a decade, the NFL has launched purpose-led campaigns around its youth health and wellness initiatives — yet most people have no idea the League has a year-round presence in schools and communities nationwide. Fragmented messaging and inconsistent measurement have left the NFL without one holistic identity tying it all together.',
-          "The primary audience is casual NFL fans who enjoy football's communal side without being deeply invested. At the center of it: today's youth (ages 6–17) — girls who want to compete but feel culturally excluded, and boys who need to learn to welcome them. Parents are the gatekeepers who decide whether their kids ever get the invitation in the first place.",
-        ],
-      },
-      {
-        type: 'statGrid',
-        stats: [
-          { number: '306', text: 'Survey respondents, ages 16–60, behind every insight in this campaign.' },
-          { number: '16', text: 'Focus groups — parents, college students, and casual fans.' },
-          { number: '4', text: 'Audience personas built to keep the strategy grounded in real people, not just data.' },
-        ],
-      },
-      {
-        type: 'textBlock',
-        heading: 'What We Found',
-        paragraphs: [
-          "Play has moved from outside to online. Today's youth reach for a screen before a ball — screen time over an hour a day is linked to a higher risk of depression, while consistent physical activity cuts anxiety and depressive symptoms by up to 28%.",
-          "That's made worse by exclusivity: 70% of girls drop out of sports by age 14, twice the rate of boys, and kids from low-income households are 6x more likely to quit over cost alone. One focus group participant put it bluntly: “When I think about the NFL and what I associate with it, it's hyper-masculinity.”",
-          "But the fix doesn't have to be big. One mentor creates 5x the likelihood of upward progress. One small action triggers the same psychological pull as an unfinished to-do list — the brain wants to see it through. No invitation is too small to change the trajectory.",
-        ],
-      },
-      {
-        type: 'persona',
-        heading: 'Meet the Audience',
-        initials: 'BB',
-        name: 'Burnt Out Brooklyn',
-        subtitle: '16 · Austin, TX · Primary Audience',
-        paragraphs: [
-          "Brooklyn has played field hockey her whole life. This semester, she quit her varsity team — her coach stripped the fun out of the sport she loved, and she was shamed for having a muscular build. She's taken up yoga and jewelry-making since, and likes that they feel more “girly,” but deep down she misses the competitiveness and community of a team.",
-          'She lives on TikTok, YouTube, and Instagram — where frequent use is already linked to worse mental health outcomes for teen girls than for boys.',
-        ],
-      },
-      {
-        type: 'persona',
-        heading: '',
-        initials: 'PP',
-        name: 'Papa Phil',
-        subtitle: '43 · Tampa, FL · Secondary Audience',
-        paragraphs: [
-          'Phil is a nurse practitioner, a former college cornerback, and a Buccaneers fan who watches every game with his 14-year-old son — teaching him to play, inspiring him to follow in his footsteps. He has a 7-year-old daughter, too. As he teaches his son football, he never once considers teaching her.',
-          "That's the gatekeeper problem in one house: the invitation only goes one way, without anyone deciding to keep it that way.",
-        ],
-      },
-      {
-        type: 'textBlock',
-        heading: 'The Solution: It Starts With One',
-        paragraphs: [
-          "Audiences ignore messages that speak to a broad crowd instead of to them individually. They need a spark of encouragement — proof that their own actions matter more than they think. So the strategy became a single unifying idea: a campaign that puts every NFL youth program under one identity, and turns every parent, coach, and casual fan into the “01” who starts something for someone else.",
-          '“It Starts With One” deliberately echoes the NFL\'s own recent “It Takes All of Us” language — familiar, but reframed around the power of a single person inside a larger group.',
-        ],
-      },
-      {
-        type: 'callout',
-        content: [
-          { tag: 'text', text: 'Behind every great movement, there is a beginning. A backstory. Starting with one idea. One action. One moment. It doesn\'t matter how many times you get knocked down, because you only need one win to keep going. One person to inspire you. One invitation to belong. Together we win. ' },
-          { tag: 'strong', text: 'It starts with one.' },
-        ],
-      },
-      {
-        type: 'imageGrid',
-        heading: 'Bringing the Identity to Life',
-        rows: [
-          { cols: 1, images: [{ src: asset('nfl-nsac/billboard.jpg'), alt: 'Campaign billboard: "01 Parent to see her Potential" over a girls\' soccer huddle', wide: true }] },
-        ],
-      },
-      {
-        type: 'localVideo',
-        wide: true,
-        heading: 'The Anthem Spot',
-        src: asset('nfl-nsac/anthem-spot.mp4'),
-        poster: asset('nfl-nsac/anthem-spot-poster.jpg'),
-        caption: 'The campaign\'s :30 TV anthem spot, written and produced for the plans book presentation.',
-      },
-      {
-        type: 'textBlock',
-        heading: 'Media Strategy',
-        paragraphs: [
-          'A yearlong rollout across three phases keeps the message tied to the NFL calendar: Launch (Aug–Dec) drives awareness of the programs that exist; Peak (Jan–Feb) leans on the Super Bowl moment to lift brand perception; Post-Season (Mar–Jul) shifts from storytelling to activation, pushing families toward real sign-ups.',
-          'The plan spans streaming and TV, social, out-of-home, cinema, gaming and retail partnerships (Madden, Dick\'s Sporting Goods), PR activations, and owned stadium placements — across both domestic and international markets.',
-        ],
-      },
-      {
-        type: 'statGrid',
-        stats: [
-          { number: '$10M', text: 'Total media budget across the full 11-month, 3-phase rollout.' },
-          { number: '4.6B', text: 'Projected impressions across every paid channel.' },
-          { number: '4.86M', text: 'Projected clicks driving families to the campaign\'s program hub.' },
-        ],
-      },
-      {
-        type: 'imageGrid',
-        heading: 'Campaign Touchpoints',
-        rows: [
-          {
-            cols: 2,
-            images: [
-              { src: asset('nfl-nsac/social-post.jpg'), alt: '"Share Your One" social stunt: a phone mockup inviting people to post the one person or moment that changed everything for them' },
-              { src: asset('nfl-nsac/hub-screenshot.jpg'), alt: 'The "01 NFL Hub" website and app mockup, the one place to explore and sign up for every NFL youth program' },
-            ],
-          },
-          {
-            cols: 2,
-            images: [
-              { src: asset('nfl-nsac/bus-wrap.jpg'), alt: 'Bus wrap: "01 Coach to inspire Change" featuring a youth football team' },
-              { src: asset('nfl-nsac/stadium-seat.jpg'), alt: 'The "01 Seat" PR activation: a reserved, branded seat at a live game honoring one person whose impact goes beyond the field' },
-            ],
-          },
-        ],
-      },
-      {
-        type: 'textBlock',
-        heading: 'Social Content',
-        paragraphs: [
-          '"Share Your One" is a social stunt built to travel: it asks people to post the one person, moment, or experience that changed everything for them, turning a campaign line into something the audience actually says in their own words. Two of the social cuts built around that question:',
-        ],
-      },
-      {
-        type: 'localVideo',
-        src: asset('nfl-nsac/social-promo-1.mp4'),
-        poster: asset('nfl-nsac/social-promo-1-poster.jpg'),
-        caption: '"What\'s your ONE moment?" — a social cut built around the campaign\'s core question.',
-      },
-      {
-        type: 'localVideo',
-        src: asset('nfl-nsac/social-promo-2.mp4'),
-        poster: asset('nfl-nsac/social-promo-2-poster.jpg'),
-        caption: '"Who\'s the ONE that gets you out to play?" — a second cut of the same social concept.',
-      },
-      {
-        type: 'callout',
-        content: [
-          { tag: 'strong', text: '84% of people we tested felt connected to the campaign\'s local-care message, and 60% preferred "It Starts With One" concepts over the alternatives.' },
-          { tag: 'text', text: ' A full agency-style campaign — research, strategy, identity, film, and a $10M media plan — built from scratch by a six-person student team.' },
-        ],
-      },
-    ],
-  },
 
   {
     slug: 'built-from-grief',
