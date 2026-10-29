@@ -11,7 +11,7 @@ export default function About() {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = 'About — Moses Markels';
+    document.title = 'About | Moses Markels';
   }, []);
 
   // Support deep-linking straight to the contact section (e.g. the header's
@@ -53,7 +53,7 @@ export default function About() {
           <div>
             <p>I live at the intersection of strategy and creativity. Whether it&apos;s crafting campaigns that change perception or creating short documentaries that tug on your heartstrings, storytelling is at the core of everything I do.</p>
             <p>My work&apos;s been shown at festivals, in classrooms, and once, on my grandma&apos;s Facebook feed with <strong>47 likes</strong>.</p>
-            <p>I&apos;ve made multiple short documentaries — because while I love a smart tagline, I also believe some stories need more than <em>30 seconds</em>.</p>
+            <p>I&apos;ve made multiple short documentaries, because while I love a smart tagline, I also believe some stories need more than <em>30 seconds</em>.</p>
           </div>
         </div>
 
@@ -77,7 +77,7 @@ export default function About() {
             </div>
           </div>
           <div>
-            <p>Some of it lives in 30-second cuts. Some of it lives in ten-minute films. All of it starts the same way — with a person, a truth, and a reason to care.</p>
+            <p>Some of it lives in 30-second cuts. Some of it lives in ten-minute films. All of it starts the same way: with a person, a truth, and a reason to care.</p>
             <p>Two bodies of work, one throughline:</p>
           </div>
         </div>

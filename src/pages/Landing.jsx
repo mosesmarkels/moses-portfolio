@@ -40,7 +40,7 @@ export default function Landing() {
   const [zoomingKey, setZoomingKey] = useState(null);
 
   useEffect(() => {
-    document.title = 'Moses Markels — Storyteller / Creative Strategist';
+    document.title = 'Moses Markels | Storyteller / Creative Strategist';
   }, []);
 
   useEffect(() => () => clearTimeout(timeoutRef.current), []);

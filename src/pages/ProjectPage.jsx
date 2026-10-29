@@ -14,7 +14,7 @@ export default function ProjectPage() {
   const project = getProjectBySlug(slug);
 
   useEffect(() => {
-    if (project) document.title = `${project.title} — Moses Markels`;
+    if (project) document.title = `${project.title} | Moses Markels`;
   }, [project]);
 
   if (!project) return <Navigate to="/" replace />;

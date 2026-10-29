@@ -30,7 +30,7 @@ export default function GalaxyPage() {
   );
 
   useEffect(() => {
-    if (galaxy) document.title = `${galaxy.title} — Moses Markels`;
+    if (galaxy) document.title = `${galaxy.title} | Moses Markels`;
   }, [galaxy]);
 
   if (!galaxy || subset.length === 0) return <Navigate to="/" replace />;
