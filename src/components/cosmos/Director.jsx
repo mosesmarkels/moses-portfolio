@@ -16,7 +16,7 @@ import { clamp, bell, cardPosition } from './useScrollProgress.js';
 // track's spacing, but galleries with fewer, more widely-spaced hotspots
 // should pass a wider value (see bellWidthFor()) so there's no dead stretch
 // of scroll between one card fading out and the next fading in.
-export default function Director({ scrollState, bellsRef, refs, hotspots, transitionRef, bellWidth = BELL }) {
+export default function Director({ scrollState, bellsRef, refs, hotspots, transitionRef, bellWidth = BELL, track = TRACK }) {
   const { camera, size } = useThree();
   const smoothMouse = useRef({ x: 0, y: 0 });
   const smoothTarget = useRef({ x: 0, y: 0 });
@@ -31,7 +31,7 @@ export default function Director({ scrollState, bellsRef, refs, hotspots, transi
     sm.y += (scrollState.current.mouseY - sm.y) * 0.06;
 
     // camera: flies down -z, drifts toward whichever hotspots are nearest
-    const camZ = 8 - p * TRACK;
+    const camZ = 8 - p * track;
     let tx = 0, ty = 0, w = 0;
     hotspots.forEach(({ anchor }) => {
       const d = Math.abs(camZ - (anchor.z + 7));

@@ -11,6 +11,14 @@
 const asset = (path) => `${import.meta.env.BASE_URL}projects/${path}`;
 
 export const TRACK = 88;
+
+// Track length for a gallery of `n` planets. TRACK was tuned for 6 planets
+// (about 11 world units between neighbors); bigger galleries get a longer
+// track so planets keep that same breathing room instead of bunching up.
+export function trackFor(n) {
+  const gap = (TRACK * (0.82 - 0.18)) / 5; // spacing of the original 6-planet gallery
+  return Math.max(TRACK, (gap * (n - 1)) / (0.82 - 0.18));
+}
 export const BELL = 0.075;
 export const ZOOM_END = 0.12;
 export const CONTACT_AT = 0.95;

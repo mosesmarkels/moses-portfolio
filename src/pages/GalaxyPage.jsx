@@ -9,7 +9,7 @@ import ZoomFlash from '../components/cosmos/ZoomFlash.jsx';
 import { ZOOM_DURATION_MS } from '../components/cosmos/ZoomTransition.jsx';
 import { useScrollProgress, useOverlayRefs } from '../components/cosmos/useScrollProgress.js';
 import { getAnchor } from '../components/cosmos/layout.js';
-import { getGalaxy, getProjectsByGalaxy, centersFor, bellWidthFor } from '../data/projects.js';
+import { getGalaxy, getProjectsByGalaxy, centersFor, bellWidthFor, trackFor } from '../data/projects.js';
 import '../styles/cosmos.css';
 
 export default function GalaxyPage() {
@@ -24,9 +24,10 @@ export default function GalaxyPage() {
 
   const centers = useMemo(() => centersFor(subset.length || 1), [subset.length]);
   const bellWidth = useMemo(() => bellWidthFor(subset.length || 1), [subset.length]);
+  const track = useMemo(() => trackFor(subset.length || 1), [subset.length]);
   const hotspots = useMemo(
-    () => subset.map((_, i) => ({ anchor: new Vector3(...getAnchor(i, centers)), center: centers[i] })),
-    [subset, centers]
+    () => subset.map((_, i) => ({ anchor: new Vector3(...getAnchor(i, centers, track)), center: centers[i] })),
+    [subset, centers, track]
   );
 
   useEffect(() => {
@@ -71,7 +72,7 @@ export default function GalaxyPage() {
               hoverIndexRef={hoverIndexRef}
             />
           ))}
-          <Director scrollState={scrollState} bellsRef={bellsRef} refs={overlayRefs} hotspots={hotspots} bellWidth={bellWidth} />
+          <Director scrollState={scrollState} bellsRef={bellsRef} refs={overlayRefs} hotspots={hotspots} bellWidth={bellWidth} track={track} />
         </CosmosCanvas>
         <HotspotOverlay
           refs={overlayRefs}
